@@ -637,12 +637,18 @@ public class theWitness : MonoBehaviour {
 			var output = new List<KMSelectable> {};
 			for (int pos=0;pos<inputs.Length;pos++)
 			{
-				if (int.Parse(inputs [pos]) == 0) {
-					Debug.LogFormat ("[The Witness #{0}] Found button press as invalid. For your safety, this command is voided.", _moduleId,inputs[pos]);
+				var buttonToPress = int.Parse (inputs [pos]);
+				if (buttonToPress >=1 && buttonToPress <=9) {
+					debugout += inputs[pos]+" ";
+					output.Add(btn[int.Parse(inputs[pos])-1]);
+				} else
+				{
+					Debug.LogFormat ("[The Witness #{0}] Found button press as invalid. For your safety, this full command is voided because of: {1}", _moduleId, inputs [pos]);
 					return null;
 				}
-				debugout += inputs[pos]+" ";
-				output.Add(btn[int.Parse(inputs[pos])-1]);
+
+
+					
 			}
 			debugout.Trim();
 			Debug.LogFormat ("[The Witness #{0}] Command Processed as press {1}", _moduleId,debugout);
