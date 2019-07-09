@@ -136,7 +136,7 @@ public class theWitness : MonoBehaviour {
 			int[] puzzle1Array = new int[] { 3,4,4,3, 4,3,3,4, 3,6,4,3, 6,3,3,4, 3,4,6,3, 4,3,3,6, 4,6,3,4, 6,4,4,3, 4,3,6,4, 3,4,4,6, 1,1,1,1, 2,2,2,2, 5,3,3,6, 3,6,5,3, 6,3,3,5, 3,5,6,3, 5,4,4,6, 4,6,5,4, 6,4,4,5, 4,5,6,4 };
 			SetupSymbols (puzzle1Array [symbolRandomizer], puzzle1Array [symbolRandomizer + 1], puzzle1Array [symbolRandomizer + 2], puzzle1Array [symbolRandomizer + 3]);
 		}
-
+		else
 		if (puzzleId >= 10 && puzzleId < 18) {
 			correctLine = "adgj";
 			alternativeLine = null;
@@ -147,7 +147,7 @@ public class theWitness : MonoBehaviour {
 			int[] puzzle2Array = new int[] { 5,2,1,1, 5,1,2,2, 1,2,5,1, 2,1,5,2, 1,2,1,5, 2,1,2,5, 1,2,0,1, 2,1,0,2, 1,2,1,1, 2,1,2,2, 3,0,5,3, 5,0,3,3, 3,0,3,5, 4,0,5,4, 5,0,4,4, 4,0,4,5 };
 			SetupSymbols (puzzle2Array [symbolRandomizer], puzzle2Array [symbolRandomizer + 1], puzzle2Array [symbolRandomizer + 2], puzzle2Array [symbolRandomizer + 3]);
 		}
-
+		else
 		if (puzzleId >= 18 && puzzleId < 26) {
 			correctLine = "cfil";
 			alternativeLine = null;
@@ -158,7 +158,7 @@ public class theWitness : MonoBehaviour {
 			int[] puzzle3Array = new int[] { 1,1,2,5, 2,2,1,5, 1,5,2,1, 2,5,1,2, 5,1,2,1, 5,2,1,2, 1,0,2,1, 2,0,1,2, 1,1,2,1, 2,2,1,2, 3,5,0,3, 3,3,0,5, 5,3,0,3, 4,5,0,4, 4,4,0,5, 5,4,0,4 };
 			SetupSymbols (puzzle3Array [symbolRandomizer], puzzle3Array [symbolRandomizer + 1], puzzle3Array [symbolRandomizer + 2], puzzle3Array [symbolRandomizer + 3]);
 		}
-
+		else
 		if (puzzleId >= 26 && puzzleId < 34) {
 			correctLine = "chkigj";
 			alternativeLine = "abegil";
@@ -169,7 +169,7 @@ public class theWitness : MonoBehaviour {
 			int[] puzzle4Array = new int[] { 1,5,1,2, 2,5,2,1, 5,1,1,2, 5,2,2,1, 1,1,5,2, 2,2,5,1, 0,1,1,2, 0,2,2,1, 1,1,1,2, 2,2,2,1, 5,3,3,0, 3,5,3,0, 3,3,5,0, 5,4,4,0, 4,5,4,0, 4,4,5,0 };
 			SetupSymbols (puzzle4Array [symbolRandomizer], puzzle4Array [symbolRandomizer + 1], puzzle4Array [symbolRandomizer + 2], puzzle4Array [symbolRandomizer + 3]);
 		}
-
+		else
 		if (puzzleId >= 34 && puzzleId < 42) {
 			correctLine = "adfhkl";
 			alternativeLine = "cfdbej";
@@ -180,7 +180,7 @@ public class theWitness : MonoBehaviour {
 			int[] puzzle5Array = new int[] { 2,1,5,1, 1,2,5,2, 2,1,1,5, 1,2,2,5, 2,5,1,1, 1,5,2,2, 2,1,1,0, 1,2,2,0, 2,1,1,1, 1,2,2,2, 0,3,3,5, 0,3,5,3, 0,5,3,3, 0,4,4,5, 0,4,5,4, 0,5,4,4 };
 			SetupSymbols (puzzle5Array [symbolRandomizer], puzzle5Array [symbolRandomizer + 1], puzzle5Array [symbolRandomizer + 2], puzzle5Array [symbolRandomizer + 3]);
 		}
-
+		else
 		if (puzzleId == 42) {
 			correctLine = "adil";
 			alternativeLine = "chkidbej";
@@ -191,7 +191,7 @@ public class theWitness : MonoBehaviour {
 			int[] puzzle6Array = new int[] { 1,2,1,2, 2,1,2,1 };
 			SetupSymbols (puzzle6Array [symbolRandomizer], puzzle6Array [symbolRandomizer + 1], puzzle6Array [symbolRandomizer + 2], puzzle6Array [symbolRandomizer + 3]);
 		}
-
+		else
 		if (puzzleId == 43) {
 			correctLine = "abegfhkl";
 			alternativeLine = "cfgj";
@@ -202,6 +202,8 @@ public class theWitness : MonoBehaviour {
 			int[] puzzle7Array = new int[] { 1,1,2,2, 2,2,1,1 };
 			SetupSymbols (puzzle7Array [symbolRandomizer], puzzle7Array [symbolRandomizer + 1], puzzle7Array [symbolRandomizer + 2], puzzle7Array [symbolRandomizer + 3]);
 		}
+		else
+		Debug.LogFormat ("[The Witness #{0}] The module was unable to generate a puzzle with a solution. Please report this issue to bmo22xdd on Discord.", _moduleId);
 	}
 
 
@@ -623,27 +625,30 @@ public class theWitness : MonoBehaviour {
 			Debug.LogFormat ("[The Witness #{0}] Command Processed as submit.", _moduleId);
 			return new[] { submit };
 		}
-		else if (Regex.IsMatch (command, @"^press +\d$")) {
-			command = command.Substring(5).Trim();
-			Debug.LogFormat ("[The Witness #{0}] Command Processed as press {1}.", _moduleId,command);
-			return new[] { btn [int.Parse (command [0].ToString ()) - 1] };
-		}
-		else if (Regex.IsMatch (command, @"^press (\d\s)+")) {
+//		else if (Regex.IsMatch (command, @"^press +\d$")) {
+//			command = command.Substring(5).Trim();
+//			Debug.LogFormat ("[The Witness #{0}] Command Processed as press {1}.", _moduleId,command);
+//			return new[] { btn [int.Parse (command [0].ToString ()) - 1] };
+//		}
+		else if (Regex.IsMatch (command, @"^press(\s\d)+")) {
 			command = command.Substring(5).Trim();
 			var inputs = command.Split (new[] { ' ', ' ', '|', '&' });
 			var debugout = "";
 			var output = new List<KMSelectable> {};
 			for (int pos=0;pos<inputs.Length;pos++)
 			{
+				if (int.Parse(inputs [pos]) == 0) {
+					Debug.LogFormat ("[The Witness #{0}] Found button press as invalid. For your safety, this command is voided.", _moduleId,inputs[pos]);
+					return null;
+				}
 				debugout += inputs[pos]+" ";
 				output.Add(btn[int.Parse(inputs[pos])-1]);
 			}
 			debugout.Trim();
-			Debug.LogFormat ("[The Witness #{0}] Command Processed as press multiples: {1}", _moduleId,debugout);
+			Debug.LogFormat ("[The Witness #{0}] Command Processed as press {1}", _moduleId,debugout);
 			return (output.Count > 0) ? output.ToArray() : null;
 		}
 		Debug.LogFormat ("[The Witness #{0}] Unknown Command: {1}", _moduleId,command);
-
 		return null;
 	}
 
