@@ -25,7 +25,6 @@ public class theWitness : MonoBehaviour {
 
 	private int puzzleId = 0;
 
-	private bool isFirst = true;
 	private int lastPress = 0;
 	private bool tmOn = false;
 	private bool trOn = false;
@@ -99,8 +98,8 @@ public class theWitness : MonoBehaviour {
 
 	void Init()
 	{
-		puzzleId = Random.Range (1, 45);
-		Debug.LogFormat ("[The Witness #{0}] Puzzle ID {1}", _moduleId, puzzleId);
+		puzzleId = Random.Range (1, 44);
+		Debug.LogFormat ("[The Witness #{0}] Generated Puzzle ID {1}", _moduleId, puzzleId);
 
 		currentLine = "";
 
@@ -140,7 +139,7 @@ public class theWitness : MonoBehaviour {
 
 		if (puzzleId >= 10 && puzzleId < 18) {
 			correctLine = "adgj";
-			alternativeLine = "zzzz";
+			alternativeLine = null;
 
 			Debug.LogFormat ("[The Witness #{0}] Correct line is 'tr, tsm, mr, bsr'", _moduleId);
 
@@ -151,7 +150,7 @@ public class theWitness : MonoBehaviour {
 
 		if (puzzleId >= 18 && puzzleId < 26) {
 			correctLine = "cfil";
-			alternativeLine = "zzzz";
+			alternativeLine = null;
 
 			Debug.LogFormat ("[The Witness #{0}] Correct line is 'tsl, ml, bsm, br'", _moduleId);
 
@@ -182,7 +181,7 @@ public class theWitness : MonoBehaviour {
 			SetupSymbols (puzzle5Array [symbolRandomizer], puzzle5Array [symbolRandomizer + 1], puzzle5Array [symbolRandomizer + 2], puzzle5Array [symbolRandomizer + 3]);
 		}
 
-		if (puzzleId == 43) {
+		if (puzzleId == 42) {
 			correctLine = "adil";
 			alternativeLine = "chkidbej";
 
@@ -193,7 +192,7 @@ public class theWitness : MonoBehaviour {
 			SetupSymbols (puzzle6Array [symbolRandomizer], puzzle6Array [symbolRandomizer + 1], puzzle6Array [symbolRandomizer + 2], puzzle6Array [symbolRandomizer + 3]);
 		}
 
-		if (puzzleId == 44) {
+		if (puzzleId == 43) {
 			correctLine = "abegfhkl";
 			alternativeLine = "cfgj";
 
@@ -276,11 +275,15 @@ public class theWitness : MonoBehaviour {
 
 		Audio.PlayGameSoundAtTransform (KMSoundOverride.SoundEffect.ButtonPress, submit.transform);
 		submit.AddInteractionPunch ();
-
-		if (correctLine == currentLine) {
-
-			Debug.LogFormat ("[The Witness #{0}] Expected line: {1} or {2}, input line: {3}.", _moduleId, correctLine, alternativeLine, currentLine);
-			Debug.LogFormat ("[The Witness #{0}] Module defused. Well done :)", _moduleId);
+		if ( alternativeLine != null) {
+			Debug.LogFormat ("[The Witness #{0}] Expected line: {1} or {2}, inputted line: {3}.", _moduleId, correctLine, alternativeLine, currentLine);
+		}
+		else
+		{
+			Debug.LogFormat ("[The Witness #{0}] Expected line: {1}, inputted line: {2}.", _moduleId, correctLine, currentLine);
+		}
+		if (correctLine == currentLine || alternativeLine == currentLine) {
+			Debug.LogFormat ("[The Witness #{0}] That is correct. Module defused.", _moduleId);
 
 			Audio.PlaySoundAtTransform ("disarmed", Module.transform);
 			wireGray.SetActive (false);
@@ -288,20 +291,10 @@ public class theWitness : MonoBehaviour {
 			Module.HandlePass (); 
 			_isSolved = true;
 
-		} else if (alternativeLine == currentLine) {
-
-			Debug.LogFormat ("[The Witness #{0}] Expected line: {1} or {2}, input line: {3}.", _moduleId, correctLine, alternativeLine, currentLine);
-			Debug.LogFormat ("[The Witness #{0}] Module defused. Well done :)", _moduleId);
-
-			Audio.PlaySoundAtTransform ("disarmed", Module.transform);
-			wireGray.SetActive (false);
-			wireGreen.SetActive (true);
-			Module.HandlePass ();
-			_isSolved = true;
-
 		} else {
+			
 
-			Debug.LogFormat ("[The Witness #{0}] Expected line: {1} or {2}, input line: {3}. Strike!", _moduleId, correctLine, alternativeLine, currentLine);
+			Debug.LogFormat ("[The Witness #{0}] That is not correct. Strike!", _moduleId);
 
 			Module.HandleStrike ();
 
@@ -331,7 +324,6 @@ public class theWitness : MonoBehaviour {
 
 			currentLine = "";
 			lastPress = 0;
-			isFirst = true;
 		}
 	}
 
@@ -344,7 +336,29 @@ public class theWitness : MonoBehaviour {
 	}
 
 	void LineMaker(int num){
-					
+
+		//	
+		//	The table is the following:
+		//	0-1-2
+		//	| | |
+		//	3-4-5
+		//	| | |
+		//	6-7-8
+		//	
+		//	TL refers to 0-1
+		//	TR refers to 1-2
+		//	TSL refers to 0-3
+		//	TSM refers to 1-4
+		//	TSR refers to 2-5
+		//	ML refers to 3-4
+		//	MR refers to 4-5
+		//	BSL refers to 3-6
+		//	BSM refers to 4-7
+		//	BSR refers to 5-8
+		//	BL refers to 6-7
+		//	BR refers to 7-8
+		//	
+
 		Audio.PlayGameSoundAtTransform(KMSoundOverride.SoundEffect.ButtonPress, btn[num].transform);
 
 		if (!_lightsOn || _isSolved) return;
@@ -374,21 +388,18 @@ public class theWitness : MonoBehaviour {
 
 			currentLine = "";
 			lastPress = 0;
-			isFirst = true;
 		}
 
 		if (num == 1) {
 
 			if (tmOn == true)
 				return;
-
-			if (isFirst == true) {
+			// Distance = 1
+			if (lastPress == 0) {
 				tl.SetActive (true);
 				currentLine += "a";
-				isFirst = false;
 				tmOn = true;
 				lastPress = 1;
-
 			} else if (lastPress == 4) {
 				tsm.SetActive (true);
 				currentLine += "d";
@@ -399,6 +410,13 @@ public class theWitness : MonoBehaviour {
 				currentLine += "b";
 				tmOn = true;
 				lastPress = 1;
+			} //Distance = 2
+			else if (lastPress == 7) {
+				LineMaker(4);
+				tsm.SetActive (true);
+				currentLine += "d";
+				tmOn = true;
+				lastPress = 1;
 			}
 		}
 
@@ -406,7 +424,7 @@ public class theWitness : MonoBehaviour {
 			
 			if (trOn == true)
 				return;
-
+			// Distance = 1
 			if (lastPress == 1) {
 				tr.SetActive (true);
 				currentLine += "b";
@@ -417,18 +435,25 @@ public class theWitness : MonoBehaviour {
 				currentLine += "e";
 				trOn = true;
 				lastPress = 2;
+			}//Distance = 2
+			else if (lastPress == 0) {
+				LineMaker(1);
+				tr.SetActive (true);
+				currentLine += "b";
+				trOn = true;
+				lastPress = 2;
 			}
+
 		}
 
 		if (num == 3) {
 			
 			if (mlOn == true)
 				return;
-
-			if (isFirst == true) {
+			//Distance = 1
+			if (lastPress == 0) {
 				tsl.SetActive (true);
 				currentLine += "c";
-				isFirst = false;
 				mlOn = true;
 				lastPress = 3;
 			} else if (lastPress == 4) {
@@ -441,6 +466,13 @@ public class theWitness : MonoBehaviour {
 				currentLine += "h";
 				mlOn = true;
 				lastPress = 3;
+			} // Distance = 2
+			else if (lastPress == 5) {
+				LineMaker(4);
+				ml.SetActive (true);
+				currentLine += "f";
+				mlOn = true;
+				lastPress = 3;
 			}
 		}
 
@@ -448,7 +480,7 @@ public class theWitness : MonoBehaviour {
 
 			if (mmOn == true)
 				return;
-
+			// Distance = 1
 			if (lastPress == 1) {
 				tsm.SetActive (true);
 				currentLine += "d";
@@ -476,13 +508,20 @@ public class theWitness : MonoBehaviour {
 			
 			if (mrOn == true)
 				return;
-
+			// Distance = 1
 			if (lastPress == 2) {
 				tsr.SetActive (true);
 				currentLine += "e";
 				mrOn = true;
 				lastPress = 5;
 			} else if (lastPress == 4) {
+				mr.SetActive (true);
+				currentLine += "g";
+				mrOn = true;
+				lastPress = 5;
+			}// Distance = 2
+			else if (lastPress == 3) {
+				LineMaker(4);
 				mr.SetActive (true);
 				currentLine += "g";
 				mrOn = true;
@@ -494,7 +533,7 @@ public class theWitness : MonoBehaviour {
 			
 			if (blOn == true)
 				return;
-
+			// Distance = 1
 			if (lastPress == 3) {
 				bsl.SetActive (true);
 				currentLine += "h";
@@ -505,19 +544,33 @@ public class theWitness : MonoBehaviour {
 				currentLine += "k";
 				blOn = true;
 				lastPress = 6;
+			}// Distance = 2
+			else if (lastPress == 0) {
+				LineMaker(3);
+				bsl.SetActive (true);
+				currentLine += "h";
+				blOn = true;
+				lastPress = 6;
 			}
 		}
 
 		if (num == 7) {
 			if (bmOn == true)
 				return;
-
+			// Distance = 1
 			if (lastPress == 6) {
 				bl.SetActive (true);
 				currentLine += "k";
 				bmOn = true;
 				lastPress = 7;
 			} else if (lastPress == 4) {
+				bsm.SetActive (true);
+				currentLine += "i";
+				bmOn = true;
+				lastPress = 7;
+			}// Distance = 2
+			else if (lastPress == 1) {
+				LineMaker(4);
 				bsm.SetActive (true);
 				currentLine += "i";
 				bmOn = true;
@@ -529,7 +582,7 @@ public class theWitness : MonoBehaviour {
 
 			if (brOn == true)
 				return;
-
+			// Distance = 1
 			if (lastPress == 5) {
 				bsr.SetActive (true);
 				currentLine += "j";
@@ -540,24 +593,56 @@ public class theWitness : MonoBehaviour {
 				currentLine += "l";
 				brOn = true;
 				lastPress = 8;
+			}// Distance = 2
+			else if (lastPress == 6) {
+				LineMaker(7);
+				br.SetActive (true);
+				currentLine += "l";
+				bmOn = true;
+				lastPress = 8;
+			}
+			else if (lastPress == 2) {
+				LineMaker(5);
+				bsr.SetActive (true);
+				currentLine += "j";
+				bmOn = true;
+				lastPress = 8;
 			}
 		}
 	}
 
 	//TWITCH PLAYS SETUP HERE
 #pragma warning disable 414
-	private readonly string TwitchHelpMessage = @"To press the grid buttons use !{0} press 1 [number from 1 to 9, 1 top-left corner, 9 bottom-right corner, in reading order]. To submit use !{0} submit";
+	private readonly string TwitchHelpMessage = @"To press the grid buttons use !{0} press 1 [number from 1 to 9, 1 top-left corner, 9 bottom-right corner, in reading order]. Button presses can be chained. To submit use !{0} submit";
 #pragma warning restore 414
 
 	KMSelectable[] ProcessTwitchCommand(string command){
 		command = command.ToLowerInvariant ().Trim ();
-
 		if (command == "submit")
+		{
+			Debug.LogFormat ("[The Witness #{0}] Command Processed as submit.", _moduleId);
 			return new[] { submit };
+		}
 		else if (Regex.IsMatch (command, @"^press +\d$")) {
 			command = command.Substring(5).Trim();
+			Debug.LogFormat ("[The Witness #{0}] Command Processed as press {1}.", _moduleId,command);
 			return new[] { btn [int.Parse (command [0].ToString ()) - 1] };
 		}
+		else if (Regex.IsMatch (command, @"^press (\d\s)+")) {
+			command = command.Substring(5).Trim();
+			var inputs = command.Split (new[] { ' ', ' ', '|', '&' });
+			var debugout = "";
+			var output = new List<KMSelectable> {};
+			for (int pos=0;pos<inputs.Length;pos++)
+			{
+				debugout += inputs[pos]+" ";
+				output.Add(btn[int.Parse(inputs[pos])-1]);
+			}
+			debugout.Trim();
+			Debug.LogFormat ("[The Witness #{0}] Command Processed as press multiples: {1}", _moduleId,debugout);
+			return (output.Count > 0) ? output.ToArray() : null;
+		}
+		Debug.LogFormat ("[The Witness #{0}] Unknown Command: {1}", _moduleId,command);
 
 		return null;
 	}
