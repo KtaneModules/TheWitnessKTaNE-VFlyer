@@ -34,7 +34,6 @@ public class theWitness : MonoBehaviour {
 	private bool blOn = false;
 	private bool bmOn = false;
 	private bool brOn = false;
-
 	private int symbolRandomizer = 0;
 
 	private string currentLine;
@@ -101,7 +100,7 @@ public class theWitness : MonoBehaviour {
 		puzzleId = Random.Range (1, 44);
 		Debug.LogFormat ("[The Witness #{0}] Generated Puzzle ID {1}", _moduleId, puzzleId);
 
-		currentLine = "";
+		currentLine = "1";
 
 		SetupSolution ();
 	}
@@ -127,145 +126,113 @@ public class theWitness : MonoBehaviour {
 	//for symbol setup (in puzzle#Array): 0-empty, 1-bsquare, 2-wsquare, 3-sun1, 4-sun2, 5-lpiece, 6-deleter (order tl, tr, bl, br)
 	void SetupSolution(){
 		if (puzzleId >= 1 && puzzleId < 10) {
-			correctLine = "chkl";
-			alternativeLine = "abej";
+			correctLine = "14789";
+			alternativeLine = "12369";
 
 			Debug.LogFormat ("[The Witness #{0}] Correct line is 'tsl, bsl, bl, br' or 'tl, tr, tsr, bsr'", _moduleId);
 
 			symbolRandomizer = Random.Range (0, 20) * 4;
-			int[] puzzle1Array = new int[] { 3,4,4,3, 4,3,3,4, 3,6,4,3, 6,3,3,4, 3,4,6,3, 4,3,3,6, 4,6,3,4, 6,4,4,3, 4,3,6,4, 3,4,4,6, 1,1,1,1, 2,2,2,2, 5,3,3,6, 3,6,5,3, 6,3,3,5, 3,5,6,3, 5,4,4,6, 4,6,5,4, 6,4,4,5, 4,5,6,4 };
+			int[] puzzle1Array = new int[] {3,4,4,3, 4,3,3,4, 3,6,4,3, 6,3,3,4, 3,4,6,3, 4,3,3,6, 4,6,3,4, 6,4,4,3, 4,3,6,4, 3,4,4,6, 1,1,1,1, 2,2,2,2, 5,3,3,6, 3,6,5,3, 6,3,3,5, 3,5,6,3, 5,4,4,6, 4,6,5,4, 6,4,4,5, 4,5,6,4};
 			SetupSymbols (puzzle1Array [symbolRandomizer], puzzle1Array [symbolRandomizer + 1], puzzle1Array [symbolRandomizer + 2], puzzle1Array [symbolRandomizer + 3]);
-		}
-		else
-		if (puzzleId >= 10 && puzzleId < 18) {
-			correctLine = "adgj";
+		} else if (puzzleId >= 10 && puzzleId < 18) {
+			correctLine = "12569";
 			alternativeLine = null;
 
 			Debug.LogFormat ("[The Witness #{0}] Correct line is 'tr, tsm, mr, bsr'", _moduleId);
 
-			symbolRandomizer = Random.Range (0,16) * 4;
-			int[] puzzle2Array = new int[] { 5,2,1,1, 5,1,2,2, 1,2,5,1, 2,1,5,2, 1,2,1,5, 2,1,2,5, 1,2,0,1, 2,1,0,2, 1,2,1,1, 2,1,2,2, 3,0,5,3, 5,0,3,3, 3,0,3,5, 4,0,5,4, 5,0,4,4, 4,0,4,5 };
+			symbolRandomizer = Random.Range (0, 16) * 4;
+			int[] puzzle2Array = new int[] {5,2,1,1, 5,1,2,2, 1,2,5,1, 2,1,5,2, 1,2,1,5, 2,1,2,5, 1,2,0,1, 2,1,0,2, 1,2,1,1, 2,1,2,2, 3,0,5,3, 5,0,3,3, 3,0,3,5, 4,0,5,4, 5,0,4,4, 4,0,4,5};
 			SetupSymbols (puzzle2Array [symbolRandomizer], puzzle2Array [symbolRandomizer + 1], puzzle2Array [symbolRandomizer + 2], puzzle2Array [symbolRandomizer + 3]);
-		}
-		else
-		if (puzzleId >= 18 && puzzleId < 26) {
-			correctLine = "cfil";
+		} else if (puzzleId >= 18 && puzzleId < 26) {
+			correctLine = "14589";
 			alternativeLine = null;
 
 			Debug.LogFormat ("[The Witness #{0}] Correct line is 'tsl, ml, bsm, br'", _moduleId);
 
-			symbolRandomizer = Random.Range (0,16) * 4;
-			int[] puzzle3Array = new int[] { 1,1,2,5, 2,2,1,5, 1,5,2,1, 2,5,1,2, 5,1,2,1, 5,2,1,2, 1,0,2,1, 2,0,1,2, 1,1,2,1, 2,2,1,2, 3,5,0,3, 3,3,0,5, 5,3,0,3, 4,5,0,4, 4,4,0,5, 5,4,0,4 };
+			symbolRandomizer = Random.Range (0, 16) * 4;
+			int[] puzzle3Array = new int[] {1,1,2,5, 2,2,1,5, 1,5,2,1, 2,5,1,2, 5,1,2,1, 5,2,1,2, 1,0,2,1, 2,0,1,2, 1,1,2,1, 2,2,1,2, 3,5,0,3, 3,3,0,5, 5,3,0,3, 4,5,0,4, 4,4,0,5, 5,4,0,4};
 			SetupSymbols (puzzle3Array [symbolRandomizer], puzzle3Array [symbolRandomizer + 1], puzzle3Array [symbolRandomizer + 2], puzzle3Array [symbolRandomizer + 3]);
-		}
-		else
-		if (puzzleId >= 26 && puzzleId < 34) {
-			correctLine = "chkigj";
-			alternativeLine = "abegil";
+		} else if (puzzleId >= 26 && puzzleId < 34) {
+			correctLine = "1478569";
+			alternativeLine = "1236589";
 
 			Debug.LogFormat ("[The Witness #{0}] Correct line is 'tsl, bsl, bl, bsm, mr, bsr' or 'tl, tr, tsr, mr, bsm, br'", _moduleId);
 
-			symbolRandomizer = Random.Range (0,16) * 4;
-			int[] puzzle4Array = new int[] { 1,5,1,2, 2,5,2,1, 5,1,1,2, 5,2,2,1, 1,1,5,2, 2,2,5,1, 0,1,1,2, 0,2,2,1, 1,1,1,2, 2,2,2,1, 5,3,3,0, 3,5,3,0, 3,3,5,0, 5,4,4,0, 4,5,4,0, 4,4,5,0 };
+			symbolRandomizer = Random.Range (0, 16) * 4;
+			int[] puzzle4Array = new int[] {1,5,1,2, 2,5,2,1, 5,1,1,2, 5,2,2,1, 1,1,5,2, 2,2,5,1, 0,1,1,2, 0,2,2,1, 1,1,1,2, 2,2,2,1, 5,3,3,0, 3,5,3,0, 3,3,5,0, 5,4,4,0, 4,5,4,0, 4,4,5,0};
 			SetupSymbols (puzzle4Array [symbolRandomizer], puzzle4Array [symbolRandomizer + 1], puzzle4Array [symbolRandomizer + 2], puzzle4Array [symbolRandomizer + 3]);
-		}
-		else
-		if (puzzleId >= 34 && puzzleId < 42) {
-			correctLine = "adfhkl";
-			alternativeLine = "cfdbej";
+		} else if (puzzleId >= 34 && puzzleId < 42) {
+			correctLine = "1254789";
+			alternativeLine = "1452369";
 
 			Debug.LogFormat ("[The Witness #{0}] Correct line is 'tl, tsm, ml, bsl, bl, br' or 'tsl, ml, tsm, tr, tsr, bsr'", _moduleId);
 
-			symbolRandomizer = Random.Range (0,16) * 4;
-			int[] puzzle5Array = new int[] { 2,1,5,1, 1,2,5,2, 2,1,1,5, 1,2,2,5, 2,5,1,1, 1,5,2,2, 2,1,1,0, 1,2,2,0, 2,1,1,1, 1,2,2,2, 0,3,3,5, 0,3,5,3, 0,5,3,3, 0,4,4,5, 0,4,5,4, 0,5,4,4 };
+			symbolRandomizer = Random.Range (0, 16) * 4;
+			int[] puzzle5Array = new int[] {2,1,5,1, 1,2,5,2, 2,1,1,5, 1,2,2,5, 2,5,1,1, 1,5,2,2, 2,1,1,0, 1,2,2,0, 2,1,1,1, 1,2,2,2, 0,3,3,5, 0,3,5,3, 0,5,3,3, 0,4,4,5, 0,4,5,4, 0,5,4,4};
 			SetupSymbols (puzzle5Array [symbolRandomizer], puzzle5Array [symbolRandomizer + 1], puzzle5Array [symbolRandomizer + 2], puzzle5Array [symbolRandomizer + 3]);
-		}
-		else
-		if (puzzleId == 42) {
-			correctLine = "adil";
-			alternativeLine = "chkidbej";
+		} else if (puzzleId == 42) {
+			correctLine = "12589";
+			alternativeLine = "147852369";
 
 			Debug.LogFormat ("[The Witness #{0}] Correct line is 'tl, tsm, bsm, br' or 'tsl, bsl, bl, bsm, tsm, tr, tsr, bsr'", _moduleId);
 
-			symbolRandomizer = Random.Range (0,2) * 4;
+			symbolRandomizer = Random.Range (0, 2) * 4;
 			int[] puzzle6Array = new int[] { 1,2,1,2, 2,1,2,1 };
 			SetupSymbols (puzzle6Array [symbolRandomizer], puzzle6Array [symbolRandomizer + 1], puzzle6Array [symbolRandomizer + 2], puzzle6Array [symbolRandomizer + 3]);
-		}
-		else
-		if (puzzleId == 43) {
-			correctLine = "abegfhkl";
-			alternativeLine = "cfgj";
+		} else if (puzzleId == 43) {
+			correctLine = "123654789";
+			alternativeLine = "14569";
 
 			Debug.LogFormat ("[The Witness #{0}] Correct line is 'tl, tr, tsr, mr, ml, bsl, bl, br' or 'tsl, ml, mr, bsr'", _moduleId);
 
-			symbolRandomizer = Random.Range (0,2) * 4;
+			symbolRandomizer = Random.Range (0, 2) * 4;
 			int[] puzzle7Array = new int[] { 1,1,2,2, 2,2,1,1 };
 			SetupSymbols (puzzle7Array [symbolRandomizer], puzzle7Array [symbolRandomizer + 1], puzzle7Array [symbolRandomizer + 2], puzzle7Array [symbolRandomizer + 3]);
+		} else {
+			Debug.LogFormat ("[The Witness #{0}] The module was unable to generate a puzzle with a solution. Please report this issue to bmo22xdd or VFlyer on Discord as this is a serious issue.", _moduleId);
+			correctLine = "1";
+			Debug.LogFormat ("[The Witness #{0}] For your safety, press ONLY the submit button upon getting a board without a solution.", _moduleId);
 		}
-		else
-		Debug.LogFormat ("[The Witness #{0}] The module was unable to generate a puzzle with a solution. Please report this issue to bmo22xdd on Discord.", _moduleId);
 	}
 
 
 
 	void SetupSymbols(int Symboltl, int Symboltr, int Symbolbl, int Symbolbr){
-		Debug.LogFormat ("[The Witness #{0}] Symbols shown are {1}, {2}, {3}, {4}", _moduleId, Symboltl, Symboltr, Symbolbl, Symbolbr);
-		Debug.LogFormat ("[The Witness #{0}] 0-empty, 1-bsquare, 2-wsquare, 3-sun1, 4-sun2, 5-lpiece, 6-deleter (order tl, tr, bl, br)", _moduleId);
 
-		if (Symboltl == 1) {
-			bsquare_tl.SetActive (true);
-		} else if (Symboltl == 2) {
-			wsquare_tl.SetActive (true);
-		} else if (Symboltl == 3) {
-			sun1_tl.SetActive (true);
-		} else if (Symboltl == 4) {
-			sun2_tl.SetActive (true);
-		} else if (Symboltl == 5) {
-			lpiece_tl.SetActive (true);
-		} else if (Symboltl == 6) {
-			deleter_tl.SetActive (true);
-		}
+		var SymbolsTHalf = new[] { "  ", "ks" , "ws" , "1s" , "2s" , "Lb", "de" };
+		var SymbolsBHalf = new[] { "  ", "qu" , "qu" , "un" , "un" , "lk", "lr" };
 
-		if (Symboltr == 1) {
-			bsquare_tr.SetActive (true);
-		} else if (Symboltr == 2) {
-			wsquare_tr.SetActive (true);
-		} else if (Symboltr == 3) {
-			sun1_tr.SetActive (true);
-		} else if (Symboltr == 4) {
-			sun2_tr.SetActive (true);
-		} else if (Symboltr == 5) {
-			lpiece_tr.SetActive (true);
-		} else if (Symboltr == 6) {
-			deleter_tr.SetActive (true);
-		}
-	
-		if (Symbolbl == 1) {
-			bsquare_bl.SetActive (true);
-		} else if (Symbolbl == 2) {
-			wsquare_bl.SetActive (true);
-		} else if (Symbolbl == 3) {
-			sun1_bl.SetActive (true);
-		} else if (Symbolbl == 4) {
-			sun2_bl.SetActive (true);
-		} else if (Symbolbl == 5) {
-			lpiece_bl.SetActive (true);
-		} else if (Symbolbl == 6) {
-			deleter_bl.SetActive (true);
-		}
+		Debug.LogFormat ("[The Witness #{0}] Generated Puzzle:", _moduleId);
+		Debug.LogFormat ("[The Witness #{0}] 1--2--3", _moduleId);
+		Debug.LogFormat ("[The Witness #{0}] |{1}|{2}|", _moduleId,SymbolsTHalf[Symboltl],SymbolsTHalf[Symboltr]);
+		Debug.LogFormat ("[The Witness #{0}] |{1}|{2}|", _moduleId,SymbolsBHalf[Symboltl],SymbolsBHalf[Symboltr]);
+		Debug.LogFormat ("[The Witness #{0}] 4--5--6", _moduleId);
+		Debug.LogFormat ("[The Witness #{0}] |{1}|{2}|", _moduleId,SymbolsTHalf[Symbolbl],SymbolsTHalf[Symbolbr]);
+		Debug.LogFormat ("[The Witness #{0}] |{1}|{2}|", _moduleId,SymbolsBHalf[Symbolbl],SymbolsBHalf[Symbolbr]);
+		Debug.LogFormat ("[The Witness #{0}] 7--8--9", _moduleId);
 
-		if (Symbolbr == 1) {
-			bsquare_br.SetActive (true);
-		} else if (Symbolbr == 2) {
-			wsquare_br.SetActive (true);
-		} else if (Symbolbr == 3) {
-			sun1_br.SetActive (true);
-		} else if (Symbolbr == 4) {
-			sun2_br.SetActive (true);
-		} else if (Symbolbr == 5) {
-			lpiece_br.SetActive (true);
-		} else if (Symbolbr == 6) {
-			deleter_br.SetActive (true);
+		Debug.LogFormat ("[The Witness #{0}] ksqu = Black Square", _moduleId);
+		Debug.LogFormat ("[The Witness #{0}] wsqu = White Square", _moduleId);
+		Debug.LogFormat ("[The Witness #{0}] 1sun = Sun 1", _moduleId);
+		Debug.LogFormat ("[The Witness #{0}] 2sun = Sun 2", _moduleId);
+		Debug.LogFormat ("[The Witness #{0}] lblk = L Piece", _moduleId);
+		Debug.LogFormat ("[The Witness #{0}] delr = Deleter", _moduleId);
+
+		var SymbolsTLAll = new[] {bsquare_tl,wsquare_tl,sun1_tl,sun2_tl,lpiece_tl,deleter_tl};
+		if (Symboltl >= 1&&Symboltl <= 6) {
+			SymbolsTLAll [Symboltl - 1].SetActive (true);
+		}
+		var SymbolsTRAll = new[] {bsquare_tr,wsquare_tr,sun1_tr,sun2_tr,lpiece_tr,deleter_tr};
+		if (Symboltr >= 1&&Symboltr <= 6) {
+			SymbolsTRAll [Symboltr - 1].SetActive (true);
+		}
+		var SymbolsBLAll = new[] {bsquare_bl,wsquare_bl,sun1_bl,sun2_bl,lpiece_bl,deleter_bl};
+		if (Symbolbl >= 1&&Symbolbl<=6) {
+			SymbolsBLAll [Symbolbl - 1].SetActive (true);
+		}
+		var SymbolsBRAll = new[] {bsquare_br,wsquare_br,sun1_br,sun2_br,lpiece_br,deleter_br};
+		if (Symbolbr >= 1&&Symbolbr<=6) {
+			SymbolsBRAll [Symbolbr - 1].SetActive (true);
 		}
 	}
 
@@ -324,7 +291,7 @@ public class theWitness : MonoBehaviour {
 			bmOn = false;
 			brOn = false;
 
-			currentLine = "";
+			currentLine = "1";
 			lastPress = 0;
 		}
 	}
@@ -388,7 +355,7 @@ public class theWitness : MonoBehaviour {
 			bmOn = false;
 			brOn = false;
 
-			currentLine = "";
+			currentLine = "1";
 			lastPress = 0;
 		}
 
@@ -399,24 +366,24 @@ public class theWitness : MonoBehaviour {
 			// Distance = 1
 			if (lastPress == 0) {
 				tl.SetActive (true);
-				currentLine += "a";
+				currentLine += "2";
 				tmOn = true;
 				lastPress = 1;
 			} else if (lastPress == 4) {
 				tsm.SetActive (true);
-				currentLine += "d";
+				currentLine += "2";
 				tmOn = true;
 				lastPress = 1;
 			} else if (lastPress == 2) {
 				tr.SetActive (true);
-				currentLine += "b";
+				currentLine += "2";
 				tmOn = true;
 				lastPress = 1;
 			} //Distance = 2
 			else if (lastPress == 7) {
 				LineMaker(4);
 				tsm.SetActive (true);
-				currentLine += "d";
+				currentLine += "2";
 				tmOn = true;
 				lastPress = 1;
 			}
@@ -429,19 +396,19 @@ public class theWitness : MonoBehaviour {
 			// Distance = 1
 			if (lastPress == 1) {
 				tr.SetActive (true);
-				currentLine += "b";
+				currentLine += "3";
 				trOn = true;
 				lastPress = 2;
 			} else if (lastPress == 5) {
 				tsr.SetActive (true);
-				currentLine += "e";
+				currentLine += "3";
 				trOn = true;
 				lastPress = 2;
 			}//Distance = 2
 			else if (lastPress == 0) {
 				LineMaker(1);
 				tr.SetActive (true);
-				currentLine += "b";
+				currentLine += "3";
 				trOn = true;
 				lastPress = 2;
 			}
@@ -455,24 +422,24 @@ public class theWitness : MonoBehaviour {
 			//Distance = 1
 			if (lastPress == 0) {
 				tsl.SetActive (true);
-				currentLine += "c";
+				currentLine += "4";
 				mlOn = true;
 				lastPress = 3;
 			} else if (lastPress == 4) {
 				ml.SetActive (true);
-				currentLine += "f";
+				currentLine += "4";
 				mlOn = true;
 				lastPress = 3;
 			} else if (lastPress == 6) {
 				bsl.SetActive (true);
-				currentLine += "h";
+				currentLine += "4";
 				mlOn = true;
 				lastPress = 3;
 			} // Distance = 2
 			else if (lastPress == 5) {
 				LineMaker(4);
 				ml.SetActive (true);
-				currentLine += "f";
+				currentLine += "4";
 				mlOn = true;
 				lastPress = 3;
 			}
@@ -485,22 +452,22 @@ public class theWitness : MonoBehaviour {
 			// Distance = 1
 			if (lastPress == 1) {
 				tsm.SetActive (true);
-				currentLine += "d";
+				currentLine += "5";
 				mmOn = true;
 				lastPress = 4;
 			} else if (lastPress == 3) {
 				ml.SetActive (true);
-				currentLine += "f";
+				currentLine += "5";
 				mmOn = true;
 				lastPress = 4;
 			} else if (lastPress == 5) {
 				mr.SetActive (true);
-				currentLine += "g";
+				currentLine += "5";
 				mmOn = true;
 				lastPress = 4;
 			} else if (lastPress == 7) {
 				bsm.SetActive (true);
-				currentLine += "i";
+				currentLine += "5";
 				mmOn = true;
 				lastPress = 4;
 			}
@@ -513,19 +480,19 @@ public class theWitness : MonoBehaviour {
 			// Distance = 1
 			if (lastPress == 2) {
 				tsr.SetActive (true);
-				currentLine += "e";
+				currentLine += "6";
 				mrOn = true;
 				lastPress = 5;
 			} else if (lastPress == 4) {
 				mr.SetActive (true);
-				currentLine += "g";
+				currentLine += "6";
 				mrOn = true;
 				lastPress = 5;
 			}// Distance = 2
 			else if (lastPress == 3) {
 				LineMaker(4);
 				mr.SetActive (true);
-				currentLine += "g";
+				currentLine += "6";
 				mrOn = true;
 				lastPress = 5;
 			}
@@ -538,19 +505,19 @@ public class theWitness : MonoBehaviour {
 			// Distance = 1
 			if (lastPress == 3) {
 				bsl.SetActive (true);
-				currentLine += "h";
+				currentLine += "7";
 				blOn = true;
 				lastPress = 6;
 			} else if (lastPress == 7) {
 				bl.SetActive (true);
-				currentLine += "k";
+				currentLine += "7";
 				blOn = true;
 				lastPress = 6;
 			}// Distance = 2
 			else if (lastPress == 0) {
 				LineMaker(3);
 				bsl.SetActive (true);
-				currentLine += "h";
+				currentLine += "7";
 				blOn = true;
 				lastPress = 6;
 			}
@@ -562,19 +529,19 @@ public class theWitness : MonoBehaviour {
 			// Distance = 1
 			if (lastPress == 6) {
 				bl.SetActive (true);
-				currentLine += "k";
+				currentLine += "8";
 				bmOn = true;
 				lastPress = 7;
 			} else if (lastPress == 4) {
 				bsm.SetActive (true);
-				currentLine += "i";
+				currentLine += "8";
 				bmOn = true;
 				lastPress = 7;
 			}// Distance = 2
 			else if (lastPress == 1) {
 				LineMaker(4);
 				bsm.SetActive (true);
-				currentLine += "i";
+				currentLine += "8";
 				bmOn = true;
 				lastPress = 7;
 			}
@@ -587,26 +554,26 @@ public class theWitness : MonoBehaviour {
 			// Distance = 1
 			if (lastPress == 5) {
 				bsr.SetActive (true);
-				currentLine += "j";
+				currentLine += "9";
 				brOn = true;
 				lastPress = 8;
 			} else if (lastPress == 7) {
 				br.SetActive (true);
-				currentLine += "l";
+				currentLine += "9";
 				brOn = true;
 				lastPress = 8;
 			}// Distance = 2
 			else if (lastPress == 6) {
 				LineMaker(7);
 				br.SetActive (true);
-				currentLine += "l";
+				currentLine += "9";
 				bmOn = true;
 				lastPress = 8;
 			}
 			else if (lastPress == 2) {
 				LineMaker(5);
 				bsr.SetActive (true);
-				currentLine += "j";
+				currentLine += "9";
 				bmOn = true;
 				lastPress = 8;
 			}
