@@ -597,7 +597,7 @@ public class theWitness : MonoBehaviour {
 //			Debug.LogFormat ("[The Witness #{0}] Command Processed as press {1}.", _moduleId,command);
 //			return new[] { btn [int.Parse (command [0].ToString ()) - 1] };
 //		}
-		else if (Regex.IsMatch (command, @"^press(\s\d)+")) {
+		else if (Regex.IsMatch (command, @"^press(\s\d)+$")) {
 			command = command.Substring(5).Trim();
 			var inputs = command.Split (new[] { ' ', ' ', '|', '&' });
 			var debugout = "";
