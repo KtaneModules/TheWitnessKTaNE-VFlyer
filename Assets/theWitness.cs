@@ -213,7 +213,7 @@ public class theWitness : MonoBehaviour {
 		Debug.LogFormat ("[The Witness #{0}] wsqu = White Square", _moduleId);
 		Debug.LogFormat ("[The Witness #{0}] 1sun = Sun 1", _moduleId);
 		Debug.LogFormat ("[The Witness #{0}] 2sun = Sun 2", _moduleId);
-		Debug.LogFormat ("[The Witness #{0}] lblk = L Piece", _moduleId);
+		Debug.LogFormat ("[The Witness #{0}] Lblk = L Piece", _moduleId);
 		Debug.LogFormat ("[The Witness #{0}] delr = Deleter", _moduleId);
 
 		var SymbolsTLAll = new[] {bsquare_tl,wsquare_tl,sun1_tl,sun2_tl,lpiece_tl,deleter_tl};
