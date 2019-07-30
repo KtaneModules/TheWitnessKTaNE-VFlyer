@@ -40,6 +40,7 @@ public class theWitness : MonoBehaviour {
 	private string correctLine;
 	private string alternativeLine;
 
+
 	// Use this for initialization
 	void Start ()
 	{
@@ -356,8 +357,7 @@ public class theWitness : MonoBehaviour {
 			currentLine = "1";
 			lastPress = 0;
 		}
-
-		if (num == 1) {
+		else if (num == 1) {
 
 			if (tmOn == true)
 				return;
@@ -386,9 +386,7 @@ public class theWitness : MonoBehaviour {
 				lastPress = 1;
 			}
 		}
-
-		if (num == 2) {
-			
+		else if (num == 2) {
 			if (trOn == true)
 				return;
 			// Distance = 1
@@ -412,8 +410,7 @@ public class theWitness : MonoBehaviour {
 			}
 
 		}
-
-		if (num == 3) {
+		else if (num == 3) {
 			
 			if (mlOn == true)
 				return;
@@ -442,8 +439,7 @@ public class theWitness : MonoBehaviour {
 				lastPress = 3;
 			}
 		}
-
-		if (num == 4) {
+		else if (num == 4) {
 
 			if (mmOn == true)
 				return;
@@ -470,8 +466,7 @@ public class theWitness : MonoBehaviour {
 				lastPress = 4;
 			}
 		}
-
-		if (num == 5) {
+		else if (num == 5) {
 			
 			if (mrOn == true)
 				return;
@@ -495,8 +490,7 @@ public class theWitness : MonoBehaviour {
 				lastPress = 5;
 			}
 		}
-
-		if (num == 6) {
+		else if (num == 6) {
 			
 			if (blOn == true)
 				return;
@@ -520,8 +514,7 @@ public class theWitness : MonoBehaviour {
 				lastPress = 6;
 			}
 		}
-
-		if (num == 7) {
+		else if (num == 7) {
 			if (bmOn == true)
 				return;
 			// Distance = 1
@@ -544,8 +537,7 @@ public class theWitness : MonoBehaviour {
 				lastPress = 7;
 			}
 		}
-
-		if (num == 8) {
+		else if (num == 8) {
 
 			if (brOn == true)
 				return;
@@ -595,6 +587,7 @@ public class theWitness : MonoBehaviour {
 //			Debug.LogFormat ("[The Witness #{0}] Command Processed as press {1}.", _moduleId,command);
 //			return new[] { btn [int.Parse (command [0].ToString ()) - 1] };
 //		}
+// Old Command. Feel free to ignore this above.
 		else if (Regex.IsMatch (command, @"^press(\s\d)+$")) {
 			command = command.Substring(5).Trim();
 			var inputs = command.Split (new[] { ' ', ' ', '|', '&' });
