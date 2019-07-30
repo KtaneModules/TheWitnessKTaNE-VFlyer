@@ -14,12 +14,15 @@ MonoBehaviour:
   id: thewitness
   title: The Witness
   author: bmo22xd,VFlyer
-  description: "...and a dream.\n\nComplete this mysterious puzzle inspired by \"The
-    Witness\" game.\n\nmoduleID: thewitness\nOriginally created by: bmo22xd\nRenewed
-    by VFlyer\nPublished by \n\n[b]WARNING: Module still in development[/b] \nExpect
-    the code to be DISGUSTING. It works, though some help in optimizing the script
-    is really appreciated.\n\nManual included in the mod file and found here:\n[url=https://ktane.timwi.de/HTML/The%20Witness.html]https://ktane.timwi.de/HTML/The%20Witness.html[/url]\n\nSource
-    code: [url=https://github.com/PauGuri2002/TheWitnessKTaNE] here [/url]"
-  version: 1.1
+  description: "...and a dream.\n\n[b]PLEASE UNSUBSCRIBE TO THE OLD VERSION HERE [url=https://steamcommunity.com/sharedfiles/filedetails/?id=1699868733]https://steamcommunity.com/sharedfiles/filedetails/?id=1699868733[/url]
+    AS THE OLD VERSION IS NO LONGER MAINTAINED[/b]\n\nComplete this mysterious puzzle
+    inspired by \"The Witness\" game.\n\nmoduleID: thewitness\nOriginally created
+    by: bmo22xd\nRenewed by VFlyer\nPublished by \n\n[b]WARNING: Module still in development[/b]
+    \nExpect the code to be DISGUSTING. It works, though some help in optimizing the
+    script is really appreciated.\n\nManual included in the mod file and found here:\n[url=https://ktane.timwi.de/HTML/The%20Witness.html]https://ktane.timwi.de/HTML/The%20Witness.html[/url]\n\nSource
+    Code:\nOriginal Version: [url=https://github.com/PauGuri2002/TheWitnessKTaNE]
+    here [/url]\nRenewed Version: [url=https://github.com/VFlyer/TheWitnessKTaNE]
+    https://github.com/VFlyer/TheWitnessKTaNE[/url]"
+  version: RENEW 1.0
   outputFolder: build
   previewImage: {fileID: 2800000, guid: ec2d76c19e6374c53951b10262f60676, type: 3}
