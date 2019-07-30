@@ -16,9 +16,9 @@ MonoBehaviour:
   author: bmo22xd,VFlyer
   description: "...and a dream.\n\nComplete this mysterious puzzle inspired by \"The
     Witness\" game.\n\nmoduleID: thewitness\nOriginally created by: bmo22xd\nRenewed
-    by VFlyer\n\n[b]WARNING: Module still in development[/b] \nExpect the code to
-    be DISGUSTING. It works, though some help in optimizing the script is really appreciated.\n\nManual
-    included in the mod file and found here:\n[url=https://ktane.timwi.de/HTML/The%20Witness.html]https://ktane.timwi.de/HTML/The%20Witness.html[/url]\n\nSource
+    by VFlyer\nPublished by \n\n[b]WARNING: Module still in development[/b] \nExpect
+    the code to be DISGUSTING. It works, though some help in optimizing the script
+    is really appreciated.\n\nManual included in the mod file and found here:\n[url=https://ktane.timwi.de/HTML/The%20Witness.html]https://ktane.timwi.de/HTML/The%20Witness.html[/url]\n\nSource
     code: [url=https://github.com/PauGuri2002/TheWitnessKTaNE] here [/url]"
   version: 1.1
   outputFolder: build
