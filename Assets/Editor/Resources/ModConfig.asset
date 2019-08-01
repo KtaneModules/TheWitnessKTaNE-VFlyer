@@ -20,9 +20,8 @@ MonoBehaviour:
     by: bmo22xd\nRenewed by VFlyer\nPublished by \n\n[b]WARNING: Module still in development[/b]
     \nExpect the code to be DISGUSTING. It works, though some help in optimizing the
     script is really appreciated.\n\nManual included in the mod file and found here:\n[url=https://ktane.timwi.de/HTML/The%20Witness.html]https://ktane.timwi.de/HTML/The%20Witness.html[/url]\n\nSource
-    Code:\nOriginal Version: [url=https://github.com/PauGuri2002/TheWitnessKTaNE]
-    here [/url]\nRenewed Version: [url=https://github.com/VFlyer/TheWitnessKTaNE]
-    https://github.com/VFlyer/TheWitnessKTaNE[/url]"
+    Code:\nOriginal Version: [url=https://github.com/PauGuri2002/TheWitnessKTaNE]https://github.com/PauGuri2002/TheWitnessKTaNE[/url]\nRenewed
+    Version: [url=https://github.com/VFlyer/TheWitnessKTaNE] https://github.com/VFlyer/TheWitnessKTaNE[/url]"
   version: RENEW 1.0
   outputFolder: build
   previewImage: {fileID: 2800000, guid: ec2d76c19e6374c53951b10262f60676, type: 3}
