@@ -23,8 +23,6 @@ public class theWitness : MonoBehaviour {
 	private bool _isSolved = false;
 	private bool _lightsOn = false;
 
-	private int puzzleId = 0;
-
 	private int lastPress = 0;
 	private bool tmOn = false;
 	private bool trOn = false;
@@ -47,46 +45,19 @@ public class theWitness : MonoBehaviour {
 		_moduleId = _moduleIdCounter++;
 		Module.OnActivate += Activate;
 
-		tl.SetActive (false);
-		tr.SetActive (false);
-		tsl.SetActive (false);
-		tsm.SetActive (false);
-		tsr.SetActive (false);
-		ml.SetActive (false);
-		mr.SetActive (false);
-		bsl.SetActive (false);
-		bsm.SetActive (false);
-		bsr.SetActive (false);
-		bl.SetActive (false);
-		br.SetActive (false);
-		bsquare_tl.SetActive (false);
-		bsquare_tr.SetActive (false);
-		bsquare_bl.SetActive (false);
-		bsquare_br.SetActive (false);
-		wsquare_tl.SetActive (false);
-		wsquare_tr.SetActive (false);
-		wsquare_bl.SetActive (false);
-		wsquare_br.SetActive (false);
-		sun1_tl.SetActive (false);
-		sun1_tr.SetActive (false);
-		sun1_bl.SetActive (false);
-		sun1_br.SetActive (false);
-		sun2_tl.SetActive (false);
-		sun2_tr.SetActive (false);
-		sun2_bl.SetActive (false);
-		sun2_br.SetActive (false);
-		deleter_tl.SetActive (false);
-		deleter_tr.SetActive (false);
-		deleter_bl.SetActive (false);
-		deleter_br.SetActive (false);
-		lpiece_tl.SetActive (false);
-		lpiece_tr.SetActive (false);
-		lpiece_bl.SetActive (false);
-		lpiece_br.SetActive (false);
-
+		var listobjects = new[] {tl,tr,tsl,tsm,tsr,ml,mr,bsl,bsm,bsr,bl,br};
+		for (int x=0;x < listobjects.Length;x++)
+		{
+			listobjects [x].SetActive (false);
+		}
 		wireGray.SetActive (true);
 		wireGreen.SetActive (false);
 		wireRed.SetActive (false);
+
+		lpiece_bl.transform.Rotate (new Vector3 (0, 90 * Random.Range (0, 4), 0));
+		lpiece_br.transform.Rotate (new Vector3 (0, 90 * Random.Range (0, 4), 0));
+		lpiece_tl.transform.Rotate (new Vector3 (0, 90 * Random.Range (0, 4), 0));
+		lpiece_tr.transform.Rotate (new Vector3 (0, 90 * Random.Range (0, 4), 0));
 	}
 
 	void Activate()
@@ -98,12 +69,9 @@ public class theWitness : MonoBehaviour {
 
 	void Init()
 	{
-		puzzleId = Random.Range (1, 44);
-		Debug.LogFormat ("[The Witness #{0}] Generated Puzzle ID {1}", _moduleId, puzzleId);
-
 		currentLine = "1";
 
-		SetupSolution ();
+		SetupSolution (Random.Range (1, 44));
 	}
 
 	void Awake(){
@@ -125,7 +93,7 @@ public class theWitness : MonoBehaviour {
 	}
 
 	//for symbol setup (in puzzle#Array): 0-empty, 1-bsquare, 2-wsquare, 3-sun1, 4-sun2, 5-lpiece, 6-deleter (order tl, tr, bl, br)
-	void SetupSolution(){
+	void SetupSolution(int puzzleId){
 		if (puzzleId >= 1 && puzzleId < 10) {
 			correctLine = "14789";
 			alternativeLine = "12369";
@@ -218,20 +186,48 @@ public class theWitness : MonoBehaviour {
 		Debug.LogFormat ("[The Witness #{0}] delr = Deleter", _moduleId);
 
 		var SymbolsTLAll = new[] {bsquare_tl,wsquare_tl,sun1_tl,sun2_tl,lpiece_tl,deleter_tl};
-		if (Symboltl >= 1&&Symboltl <= 6) {
-			SymbolsTLAll [Symboltl - 1].SetActive (true);
+		for (int v = 0; v < SymbolsTLAll.Length; v++)
+		{
+			if (v == Symboltl-1) {
+				SymbolsTLAll [v].SetActive (true);
+			}
+			else
+			{
+				SymbolsTLAll [v].SetActive (false);
+			}
 		}
 		var SymbolsTRAll = new[] {bsquare_tr,wsquare_tr,sun1_tr,sun2_tr,lpiece_tr,deleter_tr};
-		if (Symboltr >= 1&&Symboltr <= 6) {
-			SymbolsTRAll [Symboltr - 1].SetActive (true);
+		for (int v = 0; v < SymbolsTRAll.Length; v++)
+		{
+			if (v == Symboltr-1) {
+				SymbolsTRAll [v].SetActive (true);
+			}
+			else
+			{
+				SymbolsTRAll [v].SetActive (false);
+			}
 		}
 		var SymbolsBLAll = new[] {bsquare_bl,wsquare_bl,sun1_bl,sun2_bl,lpiece_bl,deleter_bl};
-		if (Symbolbl >= 1&&Symbolbl<=6) {
-			SymbolsBLAll [Symbolbl - 1].SetActive (true);
+		for (int v = 0; v < SymbolsBLAll.Length; v++)
+		{
+			if (v == Symbolbl-1) {
+				SymbolsBLAll [v].SetActive (true);
+			}
+			else
+			{
+				SymbolsBLAll [v].SetActive (false);
+			}
 		}
 		var SymbolsBRAll = new[] {bsquare_br,wsquare_br,sun1_br,sun2_br,lpiece_br,deleter_br};
-		if (Symbolbr >= 1&&Symbolbr<=6) {
-			SymbolsBRAll [Symbolbr - 1].SetActive (true);
+		for (int v = 0; v < SymbolsBRAll.Length; v++)
+		{
+			if (v == Symbolbr-1) {
+				SymbolsBRAll [v].SetActive (true);
+			}
+			else
+			{
+				SymbolsBRAll [v].SetActive (false);
+			}
 		}
 	}
 
@@ -579,7 +575,7 @@ public class theWitness : MonoBehaviour {
 		command = command.ToLowerInvariant ().Trim ();
 		if (command == "submit")
 		{
-			Debug.LogFormat ("[The Witness #{0}] Command Processed as submit.", _moduleId);
+			//Debug.LogFormat ("[The Witness #{0}] Command Processed as submit.", _moduleId);
 			return new[] { submit };
 		}
 //		else if (Regex.IsMatch (command, @"^press +\d$")) {
@@ -601,7 +597,7 @@ public class theWitness : MonoBehaviour {
 					output.Add(btn[int.Parse(inputs[pos])-1]);
 				} else
 				{
-					Debug.LogFormat ("[The Witness #{0}] Found button press as invalid. For your safety, this full command is voided because of: {1}", _moduleId, inputs [pos]);
+					//Debug.LogFormat ("[The Witness #{0}] Found button press as invalid. For your safety, this full command is voided because of: {1}", _moduleId, inputs [pos]);
 					return null;
 				}
 
@@ -609,10 +605,10 @@ public class theWitness : MonoBehaviour {
 					
 			}
 			debugout.Trim();
-			Debug.LogFormat ("[The Witness #{0}] Command Processed as press {1}", _moduleId,debugout);
+			//Debug.LogFormat ("[The Witness #{0}] Command Processed as press {1}", _moduleId,debugout);
 			return (output.Count > 0) ? output.ToArray() : null;
 		}
-		Debug.LogFormat ("[The Witness #{0}] Unknown Command: {1}", _moduleId,command);
+		//Debug.LogFormat ("[The Witness #{0}] Unknown Command: {1}", _moduleId,command);
 		return null;
 	}
 
