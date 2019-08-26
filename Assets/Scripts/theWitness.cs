@@ -58,6 +58,7 @@ public class theWitness : MonoBehaviour {
 		lpiece_br.transform.Rotate (new Vector3 (0, 90 * Random.Range (0, 4), 0));
 		lpiece_tl.transform.Rotate (new Vector3 (0, 90 * Random.Range (0, 4), 0));
 		lpiece_tr.transform.Rotate (new Vector3 (0, 90 * Random.Range (0, 4), 0));
+		SetupSolution (Random.Range (1, 44));
 	}
 
 	void Activate()
@@ -70,8 +71,7 @@ public class theWitness : MonoBehaviour {
 	void Init()
 	{
 		currentLine = "1";
-
-		SetupSolution (Random.Range (1, 44));
+		//SetupSolution (Random.Range (1, 44));
 	}
 
 	void Awake(){

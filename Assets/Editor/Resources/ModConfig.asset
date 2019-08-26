@@ -13,11 +13,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: thewitness
   title: The Witness
-  author: bmo22xd,VFlyer
+  author: VFlyer,bmo22xd
   description: "...and a dream.\n\n[b]PLEASE UNSUBSCRIBE TO THE OLD VERSION HERE [url=https://steamcommunity.com/sharedfiles/filedetails/?id=1699868733]https://steamcommunity.com/sharedfiles/filedetails/?id=1699868733[/url]
     AS THE OLD VERSION IS NO LONGER MAINTAINED[/b]\n\nComplete this mysterious puzzle
     inspired by \"The Witness\" game.\n\nmoduleID: thewitness\nOriginally created
-    by: bmo22xd\nRenewed by VFlyer\nPublished by \n\n[b]WARNING: Module still in development[/b]
+    by: bmo22xd\nRenewed and Maintained by VFlyer\n\n[b]WARNING: Module not finalized[/b]
     \nExpect the code to be DISGUSTING. It works, though some help in optimizing the
     script is really appreciated.\n\nManual included in the mod file and found here:\n[url=https://ktane.timwi.de/HTML/The%20Witness.html]https://ktane.timwi.de/HTML/The%20Witness.html[/url]\n\nSource
     Code:\nOriginal Version: [url=https://github.com/PauGuri2002/TheWitnessKTaNE]https://github.com/PauGuri2002/TheWitnessKTaNE[/url]\nRenewed
