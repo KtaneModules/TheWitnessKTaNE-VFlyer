@@ -39,8 +39,8 @@ public class theWitness : MonoBehaviour {
 	private string alternativeLine;
 
 
-	// Use this for initialization
-	void Start ()
+
+	void Start () // Use this for initialization
 	{
 		_moduleId = _moduleIdCounter++;
 		Module.OnActivate += Activate;
@@ -98,11 +98,12 @@ public class theWitness : MonoBehaviour {
 			correctLine = "14789";
 			alternativeLine = "12369";
 
-			Debug.LogFormat ("[The Witness #{0}] Correct line crosses these intersections: '1, 4, 7, 8, 9' or '1, 2, 3, 6, 9'", _moduleId);
-
 			symbolRandomizer = Random.Range (0, 20) * 4;
 			int[] puzzle1Array = new int[] {3,4,4,3, 4,3,3,4, 3,6,4,3, 6,3,3,4, 3,4,6,3, 4,3,3,6, 4,6,3,4, 6,4,4,3, 4,3,6,4, 3,4,4,6, 1,1,1,1, 2,2,2,2, 5,3,3,6, 3,6,5,3, 6,3,3,5, 3,5,6,3, 5,4,4,6, 4,6,5,4, 6,4,4,5, 4,5,6,4};
 			SetupSymbols (puzzle1Array [symbolRandomizer], puzzle1Array [symbolRandomizer + 1], puzzle1Array [symbolRandomizer + 2], puzzle1Array [symbolRandomizer + 3]);
+
+			Debug.LogFormat ("[The Witness #{0}] Correct line crosses these intersections: '1, 4, 7, 8, 9' or '1, 2, 3, 6, 9'", _moduleId);
+
 		} else if (puzzleId >= 10 && puzzleId < 18) {
 			correctLine = "12569";
 
@@ -113,30 +114,32 @@ public class theWitness : MonoBehaviour {
 			SetupSymbols (puzzle2Array [symbolRandomizer], puzzle2Array [symbolRandomizer + 1], puzzle2Array [symbolRandomizer + 2], puzzle2Array [symbolRandomizer + 3]);
 		} else if (puzzleId >= 18 && puzzleId < 26) {
 			correctLine = "14589";
-
-			Debug.LogFormat ("[The Witness #{0}] Correct line crosses these intersections:  '1, 4, 5, 8, 9'", _moduleId);
-
 			symbolRandomizer = Random.Range (0, 16) * 4;
 			int[] puzzle3Array = new int[] {1,1,2,5, 2,2,1,5, 1,5,2,1, 2,5,1,2, 5,1,2,1, 5,2,1,2, 1,0,2,1, 2,0,1,2, 1,1,2,1, 2,2,1,2, 3,5,0,3, 3,3,0,5, 5,3,0,3, 4,5,0,4, 4,4,0,5, 5,4,0,4};
 			SetupSymbols (puzzle3Array [symbolRandomizer], puzzle3Array [symbolRandomizer + 1], puzzle3Array [symbolRandomizer + 2], puzzle3Array [symbolRandomizer + 3]);
+
+			Debug.LogFormat ("[The Witness #{0}] Correct line crosses these intersections:  '1, 4, 5, 8, 9'", _moduleId);
+
 		} else if (puzzleId >= 26 && puzzleId < 34) {
 			correctLine = "1478569";
 			alternativeLine = "1236589";
 
-			Debug.LogFormat ("[The Witness #{0}] Correct line crosses these intersections: '1, 4, 7, 8, 5, 6, 9' or '1, 2, 3, 6, 5, 8, 9'", _moduleId);
-
 			symbolRandomizer = Random.Range (0, 16) * 4;
 			int[] puzzle4Array = new int[] {1,5,1,2, 2,5,2,1, 5,1,1,2, 5,2,2,1, 1,1,5,2, 2,2,5,1, 0,1,1,2, 0,2,2,1, 1,1,1,2, 2,2,2,1, 5,3,3,0, 3,5,3,0, 3,3,5,0, 5,4,4,0, 4,5,4,0, 4,4,5,0};
 			SetupSymbols (puzzle4Array [symbolRandomizer], puzzle4Array [symbolRandomizer + 1], puzzle4Array [symbolRandomizer + 2], puzzle4Array [symbolRandomizer + 3]);
+
+			Debug.LogFormat ("[The Witness #{0}] Correct line crosses these intersections: '1, 4, 7, 8, 5, 6, 9' or '1, 2, 3, 6, 5, 8, 9'", _moduleId);
+
 		} else if (puzzleId >= 34 && puzzleId < 42) {
 			correctLine = "1254789";
 			alternativeLine = "1452369";
 
-			Debug.LogFormat ("[The Witness #{0}] Correct line crosses these intersections: '1, 2, 5, 4, 7, 8, 9' or '1, 4, 5, 2, 3, 6, 9'", _moduleId);
-
 			symbolRandomizer = Random.Range (0, 16) * 4;
 			int[] puzzle5Array = new int[] {2,1,5,1, 1,2,5,2, 2,1,1,5, 1,2,2,5, 2,5,1,1, 1,5,2,2, 2,1,1,0, 1,2,2,0, 2,1,1,1, 1,2,2,2, 0,3,3,5, 0,3,5,3, 0,5,3,3, 0,4,4,5, 0,4,5,4, 0,5,4,4};
 			SetupSymbols (puzzle5Array [symbolRandomizer], puzzle5Array [symbolRandomizer + 1], puzzle5Array [symbolRandomizer + 2], puzzle5Array [symbolRandomizer + 3]);
+
+			Debug.LogFormat ("[The Witness #{0}] Correct line crosses these intersections: '1, 2, 5, 4, 7, 8, 9' or '1, 4, 5, 2, 3, 6, 9'", _moduleId);
+
 		} else if (puzzleId == 42) {
 			correctLine = "12589";
 			alternativeLine = "147852369";
@@ -150,13 +153,14 @@ public class theWitness : MonoBehaviour {
 			correctLine = "123654789";
 			alternativeLine = "14569";
 
-			Debug.LogFormat ("[The Witness #{0}] Correct line crosses these intersections: '1, 2, 3, 6, 5, 4, 7, 8, 9' or '1, 4, 5, 6, 9'", _moduleId);
-
 			symbolRandomizer = Random.Range (0, 2) * 4;
 			int[] puzzle7Array = new int[] { 1,1,2,2, 2,2,1,1 };
 			SetupSymbols (puzzle7Array [symbolRandomizer], puzzle7Array [symbolRandomizer + 1], puzzle7Array [symbolRandomizer + 2], puzzle7Array [symbolRandomizer + 3]);
+
+			Debug.LogFormat ("[The Witness #{0}] Correct line crosses these intersections: '1, 2, 3, 6, 5, 4, 7, 8, 9' or '1, 4, 5, 6, 9'", _moduleId);
+
 		} else {
-			Debug.LogFormat ("[The Witness #{0}] The module was unable to generate a puzzle with a solution. Please report this issue to bmo22xdd or VFlyer on Discord as this is a serious issue.", _moduleId);
+			Debug.LogFormat ("[The Witness #{0}] The module was unable to generate a puzzle with a solution. Please report this issue to VFlyer or bmo22xdd on Discord as this is a serious issue.", _moduleId);
 			correctLine = "1";
 			Debug.LogFormat ("[The Witness #{0}] For your safety, press ONLY the submit button upon getting a board without a solution.", _moduleId);
 		}
@@ -598,6 +602,8 @@ public class theWitness : MonoBehaviour {
 				} else
 				{
 					//Debug.LogFormat ("[The Witness #{0}] Found button press as invalid. For your safety, this full command is voided because of: {1}", _moduleId, inputs [pos]);
+					//var error = new System.FormatException("Detected an invalid button press. Your command has been voided.");
+					//throw(error);
 					return null;
 				}
 
