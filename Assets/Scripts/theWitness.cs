@@ -7,7 +7,6 @@ using Newtonsoft.Json;
 
 
 
-
 public class theWitness : MonoBehaviour {
 
 	public KMAudio Audio;
@@ -24,14 +23,9 @@ public class theWitness : MonoBehaviour {
 	private bool _lightsOn = false;
 
 	private int lastPress = 0;
-	private bool tmOn = false;
-	private bool trOn = false;
-	private bool mlOn = false;
-	private bool mmOn = false;
-	private bool mrOn = false;
-	private bool blOn = false;
-	private bool bmOn = false;
-	private bool brOn = false;
+
+	private bool[] interOn = new[] {false,false,false,false,false,false,false,false};
+
 	private int symbolRandomizer = 0;
 
 	private string currentLine;
@@ -78,15 +72,17 @@ public class theWitness : MonoBehaviour {
 		submit.OnInteract += delegate ()
 		{
 			Check();
+			updateLine (currentLine);
 			return false;
 		};
 
 		for (int i = 0; i < 9; i++)
 		{
-			int j = i;
+			int k = i;
 			btn[i].OnInteract += delegate ()
 			{
-				LineMaker(j);
+				LineMaker(k);
+				updateLine (currentLine);
 				return false;
 			};
 		}
@@ -160,9 +156,9 @@ public class theWitness : MonoBehaviour {
 			Debug.LogFormat ("[The Witness #{0}] Correct line crosses these intersections: '1, 2, 3, 6, 5, 4, 7, 8, 9' or '1, 4, 5, 6, 9'", _moduleId);
 
 		} else {
-			Debug.LogFormat ("[The Witness #{0}] The module was unable to generate a puzzle with a solution. Please report this issue to VFlyer or bmo22xdd on Discord as this is a serious issue.", _moduleId);
+			Debug.LogFormat ("[The Witness #{0}] The module was unable to generate a puzzle with a reasonable solution. Please report this issue to VFlyer or bmo22xdd on Discord as this is a serious issue.", _moduleId);
 			correctLine = "1";
-			Debug.LogFormat ("[The Witness #{0}] For your safety, press ONLY the submit button upon getting a board without a solution.", _moduleId);
+			Debug.LogFormat ("[The Witness #{0}] To solve the module in this state without commands, press ONLY the submit button upon getting a board without a solution.", _moduleId);
 		}
 	}
 
@@ -268,28 +264,6 @@ public class theWitness : MonoBehaviour {
 
 			StartCoroutine(RedWireHandle());
 
-			tl.SetActive (false);
-			tr.SetActive (false);
-			tsl.SetActive (false);
-			tsm.SetActive (false);
-			tsr.SetActive (false);
-			ml.SetActive (false);
-			mr.SetActive (false);
-			bsl.SetActive (false);
-			bsm.SetActive (false);
-			bsr.SetActive (false);
-			bl.SetActive (false);
-			br.SetActive (false);
-
-			tmOn = false;
-			trOn = false;
-			mlOn = false;
-			mmOn = false;
-			mrOn = false;
-			blOn = false;
-			bmOn = false;
-			brOn = false;
-
 			currentLine = "1";
 			lastPress = 0;
 		}
@@ -303,269 +277,128 @@ public class theWitness : MonoBehaviour {
 		wireRed.SetActive (false);
 	}
 
-	void LineMaker(int num){
+	//	
+	//	The table is the following:
+	//	0-1-2
+	//	| | |
+	//	3-4-5
+	//	| | |
+	//	6-7-8
+	//	
+	//	TL refers to 0-1
+	//	TR refers to 1-2
+	//	TSL refers to 0-3
+	//	TSM refers to 1-4
+	//	TSR refers to 2-5
+	//	ML refers to 3-4
+	//	MR refers to 4-5
+	//	BSL refers to 3-6
+	//	BSM refers to 4-7
+	//	BSR refers to 5-8
+	//	BL refers to 6-7
+	//	BR refers to 7-8
+	//	
+	//	Actual grid used for logging:
+	//	
+	//	1--2--3
+	//	|  |  |
+	//	|  |  |
+	//	4--5--6
+	//	|  |  |
+	//	|  |  |
+	//	7--8--9
+	//
 
-		//	
-		//	The table is the following:
-		//	0-1-2
-		//	| | |
-		//	3-4-5
-		//	| | |
-		//	6-7-8
-		//	
-		//	TL refers to 0-1
-		//	TR refers to 1-2
-		//	TSL refers to 0-3
-		//	TSM refers to 1-4
-		//	TSR refers to 2-5
-		//	ML refers to 3-4
-		//	MR refers to 4-5
-		//	BSL refers to 3-6
-		//	BSM refers to 4-7
-		//	BSR refers to 5-8
-		//	BL refers to 6-7
-		//	BR refers to 7-8
-		//	
+	void updateLine(string line)
+	{
+		tl.SetActive (false);
+		tr.SetActive (false);
+		tsl.SetActive (false);
+		tsm.SetActive (false);
+		tsr.SetActive (false);
+		ml.SetActive (false);
+		mr.SetActive (false);
+		bsl.SetActive (false);
+		bsm.SetActive (false);
+		bsr.SetActive (false);
+		bl.SetActive (false);
+		br.SetActive (false);
+		if (Regex.IsMatch (line, "(12)"))
+			tl.SetActive (true);
+
+		if (Regex.IsMatch (line, "(23)") || Regex.IsMatch (line, "(32)"))
+			tr.SetActive (true);
+
+		if (Regex.IsMatch (line, "(14)"))
+			tsl.SetActive (true);
+
+		if (Regex.IsMatch (line, "(25)") || Regex.IsMatch (line, "(52)"))
+			tsm.SetActive (true);
+
+		if (Regex.IsMatch (line, "(36)") || Regex.IsMatch (line, "(63)"))
+			tsr.SetActive (true);
+
+		if (Regex.IsMatch (line, "(45)") || Regex.IsMatch (line, "(54)"))
+			ml.SetActive (true);
+
+		if (Regex.IsMatch (line, "(56)") || Regex.IsMatch (line, "(65)"))
+			mr.SetActive (true);
+
+		if (Regex.IsMatch (line, "(47)") || Regex.IsMatch (line, "(74)"))
+			bsl.SetActive (true);
+
+		if (Regex.IsMatch (line, "(58)") || Regex.IsMatch (line, "(85)"))
+			bsm.SetActive (true);
+		
+		if (Regex.IsMatch (line, "(69)"))
+			bsr.SetActive (true);
+
+		if (Regex.IsMatch (line, "(78)") || Regex.IsMatch (line, "(87)"))
+			bl.SetActive (true);
+
+		if (Regex.IsMatch (line, "(89)"))
+			br.SetActive (true);
+	}
+
+	void LineMaker(int num){
 
 		Audio.PlayGameSoundAtTransform(KMSoundOverride.SoundEffect.ButtonPress, btn[num].transform);
 
 		if (!_lightsOn || _isSolved) return;
 
-		if (num == 0) {
-			tl.SetActive (false);
-			tr.SetActive (false);
-			tsl.SetActive (false);
-			tsm.SetActive (false);
-			tsr.SetActive (false);
-			ml.SetActive (false);
-			mr.SetActive (false);
-			bsl.SetActive (false);
-			bsm.SetActive (false);
-			bsr.SetActive (false);
-			bl.SetActive (false);
-			br.SetActive (false);
+		if (num <= 0 || num - 1 >= interOn.Length) {
 
-			tmOn = false;
-			trOn = false;
-			mlOn = false;
-			mmOn = false;
-			mrOn = false;
-			blOn = false;
-			bmOn = false;
-			brOn = false;
+			for (int x = 0; x < interOn.Length; x++) {
+				interOn [x] = false;
+			}
 
 			currentLine = "1";
+			updateLine (currentLine);
 			lastPress = 0;
-		}
-		else if (num == 1) {
+		} else if (interOn [num - 1] || lastPress == 8)
+			return;
+		else {
+			if ((Mathf.Abs (num - lastPress) == 1 && (num % 3 != 0 || lastPress % 3 != 0)) || Mathf.Abs (num - lastPress) == 3) {
+				
+				currentLine += (num + 1);
+				interOn [num - 1] = true;
+				//Debug.LogFormat ("[The Witness #{0}] Successfully Connected {1} to {2}", _moduleId,lastPress,num);
+				lastPress = num;
 
-			if (tmOn == true)
-				return;
-			// Distance = 1
-			if (lastPress == 0) {
-				tl.SetActive (true);
-				currentLine += "2";
-				tmOn = true;
-				lastPress = 1;
-			} else if (lastPress == 4) {
-				tsm.SetActive (true);
-				currentLine += "2";
-				tmOn = true;
-				lastPress = 1;
-			} else if (lastPress == 2) {
-				tr.SetActive (true);
-				currentLine += "2";
-				tmOn = true;
-				lastPress = 1;
-			} //Distance = 2
-			else if (lastPress == 7) {
-				LineMaker(4);
-				tsm.SetActive (true);
-				currentLine += "2";
-				tmOn = true;
-				lastPress = 1;
 			}
-		}
-		else if (num == 2) {
-			if (trOn == true)
-				return;
-			// Distance = 1
-			if (lastPress == 1) {
-				tr.SetActive (true);
-				currentLine += "3";
-				trOn = true;
-				lastPress = 2;
-			} else if (lastPress == 5) {
-				tsr.SetActive (true);
-				currentLine += "3";
-				trOn = true;
-				lastPress = 2;
-			}//Distance = 2
-			else if (lastPress == 0) {
-				LineMaker(1);
-				tr.SetActive (true);
-				currentLine += "3";
-				trOn = true;
-				lastPress = 2;
+			else if (Mathf.Abs (num - lastPress) == 2 && (lastPress+1) % 3 != 0 && (lastPress+2)%3 != 0) {
+				LineMaker (num - 1);
+				currentLine += (num + 1);
+				interOn [num - 1] = true;
+				//Debug.LogFormat ("[The Witness #{0}] Successfully Connected {1} to {2}", _moduleId,lastPress,num);
+				lastPress = num;
 			}
-
-		}
-		else if (num == 3) {
-			
-			if (mlOn == true)
-				return;
-			//Distance = 1
-			if (lastPress == 0) {
-				tsl.SetActive (true);
-				currentLine += "4";
-				mlOn = true;
-				lastPress = 3;
-			} else if (lastPress == 4) {
-				ml.SetActive (true);
-				currentLine += "4";
-				mlOn = true;
-				lastPress = 3;
-			} else if (lastPress == 6) {
-				bsl.SetActive (true);
-				currentLine += "4";
-				mlOn = true;
-				lastPress = 3;
-			} // Distance = 2
-			else if (lastPress == 5) {
-				LineMaker(4);
-				ml.SetActive (true);
-				currentLine += "4";
-				mlOn = true;
-				lastPress = 3;
-			}
-		}
-		else if (num == 4) {
-
-			if (mmOn == true)
-				return;
-			// Distance = 1
-			if (lastPress == 1) {
-				tsm.SetActive (true);
-				currentLine += "5";
-				mmOn = true;
-				lastPress = 4;
-			} else if (lastPress == 3) {
-				ml.SetActive (true);
-				currentLine += "5";
-				mmOn = true;
-				lastPress = 4;
-			} else if (lastPress == 5) {
-				mr.SetActive (true);
-				currentLine += "5";
-				mmOn = true;
-				lastPress = 4;
-			} else if (lastPress == 7) {
-				bsm.SetActive (true);
-				currentLine += "5";
-				mmOn = true;
-				lastPress = 4;
-			}
-		}
-		else if (num == 5) {
-			
-			if (mrOn == true)
-				return;
-			// Distance = 1
-			if (lastPress == 2) {
-				tsr.SetActive (true);
-				currentLine += "6";
-				mrOn = true;
-				lastPress = 5;
-			} else if (lastPress == 4) {
-				mr.SetActive (true);
-				currentLine += "6";
-				mrOn = true;
-				lastPress = 5;
-			}// Distance = 2
-			else if (lastPress == 3) {
-				LineMaker(4);
-				mr.SetActive (true);
-				currentLine += "6";
-				mrOn = true;
-				lastPress = 5;
-			}
-		}
-		else if (num == 6) {
-			
-			if (blOn == true)
-				return;
-			// Distance = 1
-			if (lastPress == 3) {
-				bsl.SetActive (true);
-				currentLine += "7";
-				blOn = true;
-				lastPress = 6;
-			} else if (lastPress == 7) {
-				bl.SetActive (true);
-				currentLine += "7";
-				blOn = true;
-				lastPress = 6;
-			}// Distance = 2
-			else if (lastPress == 0) {
-				LineMaker(3);
-				bsl.SetActive (true);
-				currentLine += "7";
-				blOn = true;
-				lastPress = 6;
-			}
-		}
-		else if (num == 7) {
-			if (bmOn == true)
-				return;
-			// Distance = 1
-			if (lastPress == 6) {
-				bl.SetActive (true);
-				currentLine += "8";
-				bmOn = true;
-				lastPress = 7;
-			} else if (lastPress == 4) {
-				bsm.SetActive (true);
-				currentLine += "8";
-				bmOn = true;
-				lastPress = 7;
-			}// Distance = 2
-			else if (lastPress == 1) {
-				LineMaker(4);
-				bsm.SetActive (true);
-				currentLine += "8";
-				bmOn = true;
-				lastPress = 7;
-			}
-		}
-		else if (num == 8) {
-
-			if (brOn == true)
-				return;
-			// Distance = 1
-			if (lastPress == 5) {
-				bsr.SetActive (true);
-				currentLine += "9";
-				brOn = true;
-				lastPress = 8;
-			} else if (lastPress == 7) {
-				br.SetActive (true);
-				currentLine += "9";
-				brOn = true;
-				lastPress = 8;
-			}// Distance = 2
-			else if (lastPress == 6) {
-				LineMaker(7);
-				br.SetActive (true);
-				currentLine += "9";
-				bmOn = true;
-				lastPress = 8;
-			}
-			else if (lastPress == 2) {
-				LineMaker(5);
-				bsr.SetActive (true);
-				currentLine += "9";
-				bmOn = true;
-				lastPress = 8;
+			else if (Mathf.Abs(num - lastPress) == 6 && lastPress!=8) {
+				LineMaker (num - 3);
+				currentLine += (num + 1);
+				interOn [num - 1] = true;
+				//Debug.LogFormat ("[The Witness #{0}] Successfully Connected {1} to {2}", _moduleId,lastPress,num);
+				lastPress = num;
 			}
 		}
 	}
@@ -582,12 +415,6 @@ public class theWitness : MonoBehaviour {
 			//Debug.LogFormat ("[The Witness #{0}] Command Processed as submit.", _moduleId);
 			return new[] { submit };
 		}
-//		else if (Regex.IsMatch (command, @"^press +\d$")) {
-//			command = command.Substring(5).Trim();
-//			Debug.LogFormat ("[The Witness #{0}] Command Processed as press {1}.", _moduleId,command);
-//			return new[] { btn [int.Parse (command [0].ToString ()) - 1] };
-//		}
-// Old Command. Feel free to ignore this above.
 		else if (Regex.IsMatch (command, @"^press(\s\d)+$")) {
 			command = command.Substring(5).Trim();
 			var inputs = command.Split (new[] { ' ', ' ', '|', '&' });
