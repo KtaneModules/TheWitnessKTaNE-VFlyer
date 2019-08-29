@@ -266,6 +266,9 @@ public class theWitness : MonoBehaviour {
 
 			currentLine = "1";
 			lastPress = 0;
+			for (int x = 0; x < interOn.Length; x++) {
+				interOn [x] = false;
+			}
 		}
 	}
 
@@ -373,20 +376,20 @@ public class theWitness : MonoBehaviour {
 			}
 
 			currentLine = "1";
-			updateLine (currentLine);
 			lastPress = 0;
-		} else if (interOn [num - 1] || lastPress == 8)
+		} else if (interOn [num - 1] || lastPress == 8) {
 			return;
-		else {
-			if ((Mathf.Abs (num - lastPress) == 1 && (num % 3 != 0 || lastPress % 3 != 0)) || Mathf.Abs (num - lastPress) == 3) {
+		}
+		else {// Distance = 1
+			if ((Mathf.Abs (num - lastPress) == 1) && (num/3 == lastPress/3) || Mathf.Abs (num - lastPress) == 3) {
 				
 				currentLine += (num + 1);
 				interOn [num - 1] = true;
 				//Debug.LogFormat ("[The Witness #{0}] Successfully Connected {1} to {2}", _moduleId,lastPress,num);
 				lastPress = num;
 
-			}
-			else if ((Mathf.Abs (num - lastPress) == 2 && ( ((lastPress+1)%3!=0 && lastPress < num) || ((lastPress-1)%3!=0 && lastPress > num) ) && (num % 3 != 0 || lastPress % 3 != 0) )  || (Mathf.Abs(num - lastPress) == 6)) {
+			}// Distance = 2
+			else if ((Mathf.Abs (num - lastPress) == 2 && (num/3 == lastPress/3) )  || (Mathf.Abs(num - lastPress) == 6)) {
 				LineMaker ((num+lastPress)/2);
 				currentLine += (num + 1);
 				interOn [num - 1] = true;
