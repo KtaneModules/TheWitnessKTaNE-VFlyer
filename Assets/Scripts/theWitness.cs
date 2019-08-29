@@ -386,15 +386,8 @@ public class theWitness : MonoBehaviour {
 				lastPress = num;
 
 			}
-			else if (Mathf.Abs (num - lastPress) == 2 && (lastPress+1) % 3 != 0 && (lastPress+2)%3 != 0) {
-				LineMaker (num - 1);
-				currentLine += (num + 1);
-				interOn [num - 1] = true;
-				//Debug.LogFormat ("[The Witness #{0}] Successfully Connected {1} to {2}", _moduleId,lastPress,num);
-				lastPress = num;
-			}
-			else if (Mathf.Abs(num - lastPress) == 6 && lastPress!=8) {
-				LineMaker (num - 3);
+			else if ((Mathf.Abs (num - lastPress) == 2 && ( ((lastPress+1)%3!=0 && lastPress < num) || ((lastPress-1)%3!=0 && lastPress > num) ) && (num % 3 != 0 || lastPress % 3 != 0) )  || (Mathf.Abs(num - lastPress) == 6)) {
+				LineMaker ((num+lastPress)/2);
 				currentLine += (num + 1);
 				interOn [num - 1] = true;
 				//Debug.LogFormat ("[The Witness #{0}] Successfully Connected {1} to {2}", _moduleId,lastPress,num);
@@ -405,7 +398,7 @@ public class theWitness : MonoBehaviour {
 
 	//TWITCH PLAYS SETUP HERE
 #pragma warning disable 414
-	private readonly string TwitchHelpMessage = @"To press the grid buttons use !{0} press 1 [number from 1 to 9, 1 top-left corner, 9 bottom-right corner, in reading order]. Button presses can be chained. To submit use !{0} submit";
+	private readonly string TwitchHelpMessage = @"To press the grid buttons use !{0} press 1 [number from 1 to 9, 1 top-left corner, 9 bottom-right corner, in reading order]. Button presses can be chained such as !{0} press 1 2 3. To submit use !{0} submit";
 #pragma warning restore 414
 
 	KMSelectable[] ProcessTwitchCommand(string command){
