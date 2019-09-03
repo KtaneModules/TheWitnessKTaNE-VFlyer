@@ -16,7 +16,6 @@ public class theWitness : MonoBehaviour {
 	public KMSelectable submit;
 	public GameObject tl, tr, tsl, tsm, tsr, ml, mr, bsl, bsm, bsr, bl, br, bsquare_tl, bsquare_tr, bsquare_bl, bsquare_br, wsquare_tl, wsquare_tr, wsquare_bl, wsquare_br, sun1_tl, sun1_tr, sun1_bl, sun1_br, sun2_tl, sun2_tr, sun2_bl, sun2_br, deleter_tl, deleter_tr, deleter_bl, deleter_br, lpiece_tl, lpiece_tr, lpiece_bl, lpiece_br, wireGray, wireGreen, wireRed;
 	//for symbol setup: 1-bsquare, 2-wsquare, 3-sun1, 4-sun2, 5-lpiece, 6-deleter
-
 	private static int _moduleIdCounter = 1;
 	private int _moduleId = 0;
 	private bool _isSolved = false;
@@ -156,7 +155,7 @@ public class theWitness : MonoBehaviour {
 			Debug.LogFormat ("[The Witness #{0}] Correct line crosses these intersections: '1, 2, 3, 6, 5, 4, 7, 8, 9' or '1, 4, 5, 6, 9'", _moduleId);
 
 		} else {
-			Debug.LogFormat ("[The Witness #{0}] The module was unable to generate a puzzle with a reasonable solution. Please report this issue to VFlyer or bmo22xdd on Discord as this is a serious issue.", _moduleId);
+			Debug.LogFormat ("[The Witness #{0}] The module was unable to generate a puzzle with a reasonable solution. Please report this issue to VFlyer on Discord as this is a serious issue.", _moduleId);
 			correctLine = "1";
 			Debug.LogFormat ("[The Witness #{0}] To solve the module in this state without commands, press ONLY the submit button upon getting a board without a solution.", _moduleId);
 		}
