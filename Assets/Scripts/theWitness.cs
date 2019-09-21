@@ -31,6 +31,8 @@ public class theWitness : MonoBehaviour {
 	private string correctLine;
 	private string alternativeLine;
 
+	public Material[] wireColors = new Material[3];
+	public Material[] symbols = new Material[6];
 
 
 	void Start () // Use this for initialization
