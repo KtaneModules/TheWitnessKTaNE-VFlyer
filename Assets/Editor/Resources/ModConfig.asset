@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Name: ModConfig
   m_EditorClassIdentifier: 
   id: thewitness
-  title: The Witness [REUPLOAD]
+  title: The Witness
   author: VFlyer,bmo22xd
   description: "...and a dream.\n\nComplete this mysterious puzzle inspired by \"The
     Witness\" game.\n\nmoduleID: thewitness\nOriginally created by: bmo22xd\nRenewed
