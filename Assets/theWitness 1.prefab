@@ -2561,7 +2561,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: 4722ed66406f84f1ea004c57a9ad3be1, type: 2}
+  - {fileID: 2100000, guid: ac5872a6b1a60b44eb02015be9d5d7af, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2697,7 +2697,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: a043d320a26aa45068bcdcb74623b08c, type: 2}
+  - {fileID: 2100000, guid: 8e0d00feb45549242915ac70c6e9dd2a, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2799,7 +2799,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: 7d79f7cd83c1e45c4a8e7249ea472ff3, type: 2}
+  - {fileID: 2100000, guid: 3a56d9a94344e9b459896e9610e53c2c, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2969,7 +2969,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: 35595754758a240e5b9a99ca8981f5b8, type: 2}
+  - {fileID: 2100000, guid: 170b076e964d39b43b942ccd4aecbab0, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -3037,7 +3037,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: 42abb4e11b25c43c59015c2fdd2d6cbf, type: 2}
+  - {fileID: 2100000, guid: 5a77ed22b1f1d7e47830498adbd6f8f8, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -3309,7 +3309,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: 8f4311f531a8c43dfa73f8fbb4ed9602, type: 2}
+  - {fileID: 2100000, guid: 3022bc2d3453c5e4c8b0816ca7d6cd6b, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -3343,7 +3343,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: 1a11d31b2ec7145aa88402edbf1b354b, type: 2}
+  - {fileID: 2100000, guid: 9189136362db60c48850d8f82f24804b, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -3479,7 +3479,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: bcea8106450184c339657e2feab8dda9, type: 2}
+  - {fileID: 2100000, guid: e335e5741389bd743a104cf258cf49c2, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -3649,7 +3649,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: ca9f81bbafbf1491b867d6be4cdc127e, type: 2}
+  - {fileID: 2100000, guid: d931bc948aea5cf4290d6fbcaf636d89, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -3853,7 +3853,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: ae0f569333e3440a280eab6ceba59b3c, type: 2}
+  - {fileID: 2100000, guid: 76d3fa90336909448b660be9d524373f, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -3955,7 +3955,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: 373d4139f98074ab880ec1958e5ed6d9, type: 2}
+  - {fileID: 2100000, guid: 9e86791b4f80c30488843790c8272420, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -4159,7 +4159,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: aa0752d59278442aaaefb8352c68781b, type: 2}
+  - {fileID: 2100000, guid: d5816c5956a905a4789279af00d1feba, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -5947,6 +5947,17 @@ MonoBehaviour:
   wireGray: {fileID: 1915433394022278}
   wireGreen: {fileID: 1960886542462008}
   wireRed: {fileID: 1947421647713298}
+  wireColors:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  symbols:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!114 &114463889321915928
 MonoBehaviour:
   m_ObjectHideFlags: 1
