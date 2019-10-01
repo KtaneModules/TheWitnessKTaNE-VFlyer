@@ -15,7 +15,8 @@ public class theWitness : MonoBehaviour {
 	public KMSelectable[] btn;
 	public KMSelectable submit;
 	public GameObject tl, tr, tsl, tsm, tsr, ml, mr, bsl, bsm, bsr, bl, br, bsquare_tl, bsquare_tr, bsquare_bl, bsquare_br, wsquare_tl, wsquare_tr, wsquare_bl, wsquare_br, sun1_tl, sun1_tr, sun1_bl, sun1_br, sun2_tl, sun2_tr, sun2_bl, sun2_br, deleter_tl, deleter_tr, deleter_bl, deleter_br, lpiece_tl, lpiece_tr, lpiece_bl, lpiece_br, wireGray, wireGreen, wireRed;
-	//for symbol setup: 1-bsquare, 2-wsquare, 3-sun1, 4-sun2, 5-lpiece, 6-deleter
+    public GameObject symbolTL, symbolTR, symbolBL, symbolBR;
+    //for symbol setup: 1-bsquare, 2-wsquare, 3-sun1, 4-sun2, 5-lpiece, 6-deleter
 	private static int _moduleIdCounter = 1;
 	private int _moduleId = 0;
 	private bool _isSolved = false;
@@ -33,12 +34,16 @@ public class theWitness : MonoBehaviour {
 
 	public Material[] wireColors = new Material[3];
 	public Material[] symbols = new Material[6];
+    public Material[] pathCurrentOn = new Material[12];
+    public Material[] pathPrevious = new Material[12];
 
+    public int[] SymbolsActive = new int[] { 0, 0, 0, 0 };
 
 	void Start () // Use this for initialization
 	{
 		_moduleId = _moduleIdCounter++;
-		Module.OnActivate += Activate;
+        currentLine = "1";
+        Module.OnActivate += Activate;
 
 		var listobjects = new[] {tl,tr,tsl,tsm,tsr,ml,mr,bsl,bsm,bsr,bl,br};
 		for (int x=0;x < listobjects.Length;x++)
@@ -49,12 +54,20 @@ public class theWitness : MonoBehaviour {
 		wireGreen.SetActive (false);
 		wireRed.SetActive (false);
 
-		lpiece_bl.transform.Rotate (new Vector3 (0, 90 * Random.Range (0, 4), 0));
-		lpiece_br.transform.Rotate (new Vector3 (0, 90 * Random.Range (0, 4), 0));
-		lpiece_tl.transform.Rotate (new Vector3 (0, 90 * Random.Range (0, 4), 0));
-		lpiece_tr.transform.Rotate (new Vector3 (0, 90 * Random.Range (0, 4), 0));
-		SetupSolution (Random.Range (1, 44));
-	}
+        GameObject[] lpieces = new[] { lpiece_bl, lpiece_br, lpiece_tl, lpiece_tr };
+        foreach (GameObject lpiece in lpieces)
+        {
+            lpiece.transform.Rotate(new Vector3(0, 90 * Random.Range(0, 4), 0));
+        }
+        //lpiece_bl.transform.Rotate(new Vector3(0, 90 * Random.Range(0, 4), 0));
+        //lpiece_br.transform.Rotate(new Vector3(0, 90 * Random.Range(0, 4), 0));
+        //lpiece_tl.transform.Rotate(new Vector3(0, 90 * Random.Range(0, 4), 0));
+        //lpiece_tr.transform.Rotate(new Vector3(0, 90 * Random.Range(0, 4), 0));
+        if (true)
+        {
+            SetupSolution(Random.Range(1, 44));
+        }
+    }
 
 	void Activate()
 	{
@@ -65,7 +78,8 @@ public class theWitness : MonoBehaviour {
 
 	void Init()
 	{
-		currentLine = "1";
+		
+
 		//SetupSolution (Random.Range (1, 44));
 	}
 
@@ -163,9 +177,39 @@ public class theWitness : MonoBehaviour {
 		}
 	}
 
+    //	
+    //	The table is the following:
+    //	0-1-2
+    //	| | |
+    //	3-4-5
+    //	| | |
+    //	6-7-8
+    //	
+    //	TL refers to 0-1
+    //	TR refers to 1-2
+    //	TSL refers to 0-3
+    //	TSM refers to 1-4
+    //	TSR refers to 2-5
+    //	ML refers to 3-4
+    //	MR refers to 4-5
+    //	BSL refers to 3-6
+    //	BSM refers to 4-7
+    //	BSR refers to 5-8
+    //	BL refers to 6-7
+    //	BR refers to 7-8
+    //	
+    //	Actual grid used for logging:
+    //	
+    //	1--2--3
+    //	|  |  |
+    //	|  |  |
+    //	4--5--6
+    //	|  |  |
+    //	|  |  |
+    //	7--8--9
+    //
 
-
-	void SetupSymbols(int Symboltl, int Symboltr, int Symbolbl, int Symbolbr){
+    void SetupSymbols(int Symboltl, int Symboltr, int Symbolbl, int Symbolbr){
 
 		var SymbolsTHalf = new[] { "  ", "ks" , "ws" , "1s" , "2s" , "Lb", "de" };
 		var SymbolsBHalf = new[] { "  ", "qu" , "qu" , "un" , "un" , "lk", "lr" };
@@ -232,7 +276,34 @@ public class theWitness : MonoBehaviour {
 		}
 	}
 
-		
+    bool isCorrect(string path)
+    {
+        bool[] outStates = new bool[] { true, true, true, true};
+
+        int[] symbolsHalfA = new int[4];
+        int[] symbolsHalfB = new int[4];
+
+        //All possible ways to divide a 2x2 into 2 parts:
+        //o-o-o
+        //|1|2|
+        //o-o-o
+        //|3|4|
+        //o-o-o
+        //
+        //123,4
+        //12,34
+        //1,234
+        //13,24
+        //124,3
+        //134,2
+        //
+        //
+        //
+
+
+
+        return outStates[0] && outStates[1] && outStates[2] && outStates[3];
+    }
 
 	void Check(){
 
@@ -280,38 +351,6 @@ public class theWitness : MonoBehaviour {
 		wireGray.SetActive (true);
 		wireRed.SetActive (false);
 	}
-
-	//	
-	//	The table is the following:
-	//	0-1-2
-	//	| | |
-	//	3-4-5
-	//	| | |
-	//	6-7-8
-	//	
-	//	TL refers to 0-1
-	//	TR refers to 1-2
-	//	TSL refers to 0-3
-	//	TSM refers to 1-4
-	//	TSR refers to 2-5
-	//	ML refers to 3-4
-	//	MR refers to 4-5
-	//	BSL refers to 3-6
-	//	BSM refers to 4-7
-	//	BSR refers to 5-8
-	//	BL refers to 6-7
-	//	BR refers to 7-8
-	//	
-	//	Actual grid used for logging:
-	//	
-	//	1--2--3
-	//	|  |  |
-	//	|  |  |
-	//	4--5--6
-	//	|  |  |
-	//	|  |  |
-	//	7--8--9
-	//
 
 	void updateLine(string line)
 	{
