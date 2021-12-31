@@ -11,7 +11,6 @@ public class theWitness : MonoBehaviour {
 
 	public KMAudio Audio;
 	public KMBombModule Module;
-	public KMModSettings modSettings;
 	public KMSelectable[] btn;
 	public KMSelectable submit;
 	public GameObject tl, tr, tsl, tsm, tsr, ml, mr, bsl, bsm, bsr, bl, br, bsquare_tl, bsquare_tr, bsquare_bl, bsquare_br, wsquare_tl, wsquare_tr, wsquare_bl, wsquare_br, sun1_tl, sun1_tr, sun1_bl, sun1_br, sun2_tl, sun2_tr, sun2_bl, sun2_br, deleter_tl, deleter_tr, deleter_bl, deleter_br, lpiece_tl, lpiece_tr, lpiece_bl, lpiece_br, wireGray, wireGreen, wireRed;
@@ -24,7 +23,7 @@ public class theWitness : MonoBehaviour {
 
 	private int lastPress = 0;
 
-	private bool[] interOn = new[] {false,false,false,false,false,false,false,false};
+    private bool[] interOn = new[] { false, false, false, false, false, false, false, false };
 
 	private int symbolRandomizer = 0;
 
@@ -45,8 +44,8 @@ public class theWitness : MonoBehaviour {
         currentLine = "1";
         Module.OnActivate += Activate;
 
-		var listobjects = new[] {tl,tr,tsl,tsm,tsr,ml,mr,bsl,bsm,bsr,bl,br};
-		for (int x=0;x < listobjects.Length;x++)
+        var listobjects = new[] { tl, tr, tsl, tsm, tsr, ml, mr, bsl, bsm, bsr, bl, br };
+        for (int x = 0; x < listobjects.Length; x++)
 		{
 			listobjects [x].SetActive (false);
 		}
@@ -230,10 +229,11 @@ public class theWitness : MonoBehaviour {
 		Debug.LogFormat ("[The Witness #{0}] Lblk = L Piece", _moduleId);
 		Debug.LogFormat ("[The Witness #{0}] delr = Deleter", _moduleId);
 
-		var SymbolsTLAll = new[] {bsquare_tl,wsquare_tl,sun1_tl,sun2_tl,lpiece_tl,deleter_tl};
+        var SymbolsTLAll = new[] { bsquare_tl, wsquare_tl, sun1_tl, sun2_tl, lpiece_tl, deleter_tl };
 		for (int v = 0; v < SymbolsTLAll.Length; v++)
 		{
-			if (v == Symboltl-1) {
+            if (v == Symboltl - 1)
+            {
 				SymbolsTLAll [v].SetActive (true);
 			}
 			else
@@ -241,10 +241,11 @@ public class theWitness : MonoBehaviour {
 				SymbolsTLAll [v].SetActive (false);
 			}
 		}
-		var SymbolsTRAll = new[] {bsquare_tr,wsquare_tr,sun1_tr,sun2_tr,lpiece_tr,deleter_tr};
+        var SymbolsTRAll = new[] { bsquare_tr, wsquare_tr, sun1_tr, sun2_tr, lpiece_tr, deleter_tr };
 		for (int v = 0; v < SymbolsTRAll.Length; v++)
 		{
-			if (v == Symboltr-1) {
+            if (v == Symboltr - 1)
+            {
 				SymbolsTRAll [v].SetActive (true);
 			}
 			else
@@ -252,10 +253,11 @@ public class theWitness : MonoBehaviour {
 				SymbolsTRAll [v].SetActive (false);
 			}
 		}
-		var SymbolsBLAll = new[] {bsquare_bl,wsquare_bl,sun1_bl,sun2_bl,lpiece_bl,deleter_bl};
+        var SymbolsBLAll = new[] { bsquare_bl, wsquare_bl, sun1_bl, sun2_bl, lpiece_bl, deleter_bl };
 		for (int v = 0; v < SymbolsBLAll.Length; v++)
 		{
-			if (v == Symbolbl-1) {
+            if (v == Symbolbl - 1)
+            {
 				SymbolsBLAll [v].SetActive (true);
 			}
 			else
@@ -263,47 +265,19 @@ public class theWitness : MonoBehaviour {
 				SymbolsBLAll [v].SetActive (false);
 			}
 		}
-		var SymbolsBRAll = new[] {bsquare_br,wsquare_br,sun1_br,sun2_br,lpiece_br,deleter_br};
+        var SymbolsBRAll = new[] { bsquare_br, wsquare_br, sun1_br, sun2_br, lpiece_br, deleter_br };
 		for (int v = 0; v < SymbolsBRAll.Length; v++)
 		{
-			if (v == Symbolbr-1) {
-				SymbolsBRAll [v].SetActive (true);
-			}
-			else
-			{
-				SymbolsBRAll [v].SetActive (false);
-			}
-		}
+            if (v != Symbolbr - 1)
+            {
+                SymbolsBRAll[v].SetActive(false);
+            }
+            else
+            {
+                SymbolsBRAll[v].SetActive(true);
+            }
+        }
 	}
-
-    bool isCorrect(string path)
-    {
-        bool[] outStates = new bool[] { true, true, true, true};
-
-        int[] symbolsHalfA = new int[4];
-        int[] symbolsHalfB = new int[4];
-
-        //All possible ways to divide a 2x2 into 2 parts:
-        //o-o-o
-        //|1|2|
-        //o-o-o
-        //|3|4|
-        //o-o-o
-        //
-        //123,4
-        //12,34
-        //1,234
-        //13,24
-        //124,3
-        //134,2
-        //
-        //
-        //
-
-
-
-        return outStates[0] && outStates[1] && outStates[2] && outStates[3];
-    }
 
 	void Check(){
 
@@ -443,6 +417,16 @@ public class theWitness : MonoBehaviour {
 #pragma warning disable 414
 	private readonly string TwitchHelpMessage = @"To press the grid buttons use !{0} press 1 [number from 1 to 9, 1 top-left corner, 9 bottom-right corner, in reading order]. Button presses can be chained such as !{0} press 1 2 3. To submit use !{0} submit";
 #pragma warning restore 414
+
+	IEnumerator TwitchHandleForcedSolve()
+    {
+        for (var x = 0; x < correctLine.Length; x++)
+        {
+			btn[correctLine[x] - '1'].OnInteract();
+			yield return new WaitForSeconds(0.1f);
+        }
+		submit.OnInteract();
+    }
 
 	KMSelectable[] ProcessTwitchCommand(string command){
 		command = command.ToLowerInvariant ().Trim ();
