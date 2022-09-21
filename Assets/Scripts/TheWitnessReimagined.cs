@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Text.RegularExpressions;
 using System.Linq;
-using Newtonsoft.Json;
 
 public class TheWitnessReimagined : MonoBehaviour {
 
@@ -21,8 +20,8 @@ public class TheWitnessReimagined : MonoBehaviour {
 
 	List<int> curPathDrawn;
 
-	IEnumerable<int> symbolCenterIdxes;
-	IEnumerable<string> symbolMetadata;
+	WitnessPuzzle currentPuzzle;
+	
 
 	public Material[] wireColors = new Material[3];
 	public Material[] symbolMats = new Material[6];
@@ -60,12 +59,26 @@ public class TheWitnessReimagined : MonoBehaviour {
     {
 		_is3x3 = true;
 		var offsetValues3x3 = new[] { -1f, -1 / 3f, 1 / 3f, 1f };
+		var allSelectables = new List<KMSelectable>() { btnBase };
+		for (int x = 0; x < 4; x++)
+		{
+			for (int y = 0; y < 4; y++)
+			{
+				if (x == 0 && y == 0) continue;
+				var clonedObject = Instantiate(btnBase);
+				clonedObject.transform.parent = btnsContainer;
+				clonedObject.name = btnBase.name + "(" + (3 * x + y).ToString() + ")";
+				clonedObject.transform.localPosition = new Vector3(offsetValues3x3[y], 0, offsetValues3x3[x]);
+				clonedObject.transform.localScale = btnBase.transform.localScale;
+				clonedObject.Highlight.transform.localScale = btnBase.Highlight.transform.localScale;
+				allSelectables.Add(clonedObject.GetComponent<KMSelectable>());
+			}
+		}
 
 	}
 	void Generate2x2Empty()
     {
-		symbolCenterIdxes = new List<int>();
-		symbolMetadata = new List<string>();
+		currentPuzzle = new WitnessPuzzle();
 		var allSelectables = new List<KMSelectable>() { btnBase };
 		var offsetValues = new[] { -1f, 0, 1f };
         for (int x = 0; x < 3; x++)
@@ -85,8 +98,6 @@ public class TheWitnessReimagined : MonoBehaviour {
 		selfSelectable.Children = allSelectables.ToArray();
 		selfSelectable.UpdateChildren();
 
-		startIdx = 6;
-        endIdx = 2;
 		startLineRenderer.SetPositions(Enumerable.Repeat(new Vector3(offsetValues[startIdx % 3], offsetValues[startIdx / 3], 0), 2).ToArray());
         lineCenterTraceRenderer.SetPositions(Enumerable.Repeat(new Vector3(offsetValues[startIdx % 3], offsetValues[startIdx / 3], 0), 2).ToArray());
 		var modifiedEndPoints = Enumerable.Repeat(new Vector3(offsetValues[endIdx % 3], offsetValues[endIdx / 3], 0), 2).ToArray();
@@ -181,6 +192,9 @@ public class TheWitnessReimagined : MonoBehaviour {
 				}
 			};
 		}
+
+		startIdx = 6;
+		endIdx = 2;
 		StartCoroutine(GeneratePuzzle());
 	}
 
@@ -268,14 +282,14 @@ public class TheWitnessReimagined : MonoBehaviour {
 		do
 		{
 			// Generate a random puzzle with the valid symbols.
-			var offsetValues2x2 = new[] { -1f, -0.5f, 0, 0.5f, 1f };
-
-			var generatedSymbols = new int[_is3x3 ? 49 : 25];
+			var offsetValuesAll2x2 = new[] { -1f, -0.5f, 0, 0.5f, 1f };
+			var offsetValuesAll3x3 = new[] { -1f, -2 / 3f, -1 / 3f, 0, 1 / 3f, 2 / 3f, 1f };
+			var generatedSymbols = new WitnessSymbol[_is3x3 ? 49 : 25];
 			var generatedMetadata = new string[_is3x3 ? 49 : 25];
 			for (var x = 0; x < generatedSymbols.Length; x++)
 			{
-				var curX = x % (_is3x3 ? 49 : 25);
-				var curY = x / (_is3x3 ? 49 : 25);
+				var curX = x % (_is3x3 ? 7 : 5);
+				var curY = x / (_is3x3 ? 7 : 5);
 			}
 
 			// Check if any of the provided paths 

@@ -14,7 +14,6 @@ public class theWitness : MonoBehaviour {
 	public KMSelectable[] btn;
 	public KMSelectable submit;
 	public GameObject tl, tr, tsl, tsm, tsr, ml, mr, bsl, bsm, bsr, bl, br, bsquare_tl, bsquare_tr, bsquare_bl, bsquare_br, wsquare_tl, wsquare_tr, wsquare_bl, wsquare_br, sun1_tl, sun1_tr, sun1_bl, sun1_br, sun2_tl, sun2_tr, sun2_bl, sun2_br, deleter_tl, deleter_tr, deleter_bl, deleter_br, lpiece_tl, lpiece_tr, lpiece_bl, lpiece_br, wireGray, wireGreen, wireRed;
-    public GameObject symbolTL, symbolTR, symbolBL, symbolBR;
     //for symbol setup: 1-bsquare, 2-wsquare, 3-sun1, 4-sun2, 5-lpiece, 6-deleter
 	private static int _moduleIdCounter = 1;
 	private int _moduleId = 0;
@@ -37,6 +36,7 @@ public class theWitness : MonoBehaviour {
     public Material[] pathPrevious = new Material[12];
 
     public int[] SymbolsActive = new int[] { 0, 0, 0, 0 };
+	public int[] rotations = new int[] { 0, 0, 0, 0 };
 
 	void Start () // Use this for initialization
 	{
@@ -54,18 +54,18 @@ public class theWitness : MonoBehaviour {
 		wireRed.SetActive (false);
 
         GameObject[] lpieces = new[] { lpiece_bl, lpiece_br, lpiece_tl, lpiece_tr };
-        foreach (GameObject lpiece in lpieces)
+        for (int i = 0; i < lpieces.Length; i++)
         {
-            lpiece.transform.Rotate(new Vector3(0, 90 * Random.Range(0, 4), 0));
+            GameObject lpiece = lpieces[i];
+            var idxRotation = Random.Range(0, 4);
+			rotations[i] = idxRotation;
+			lpiece.transform.Rotate(new Vector3(0, 90 * idxRotation, 0));
         }
         //lpiece_bl.transform.Rotate(new Vector3(0, 90 * Random.Range(0, 4), 0));
         //lpiece_br.transform.Rotate(new Vector3(0, 90 * Random.Range(0, 4), 0));
         //lpiece_tl.transform.Rotate(new Vector3(0, 90 * Random.Range(0, 4), 0));
         //lpiece_tr.transform.Rotate(new Vector3(0, 90 * Random.Range(0, 4), 0));
-        if (true)
-        {
-            SetupSolution(Random.Range(1, 44));
-        }
+        SetupSolution(Random.Range(1, 44));
     }
 
 	void Activate()
@@ -221,7 +221,7 @@ public class theWitness : MonoBehaviour {
 		Debug.LogFormat ("[The Witness #{0}] |{1}|{2}|", _moduleId,SymbolsTHalf[Symbolbl],SymbolsTHalf[Symbolbr]);
 		Debug.LogFormat ("[The Witness #{0}] |{1}|{2}|", _moduleId,SymbolsBHalf[Symbolbl],SymbolsBHalf[Symbolbr]);
 		Debug.LogFormat ("[The Witness #{0}] 7--8--9", _moduleId);
-
+		Debug.LogFormat("[The Witness #{0}] Idx rotations of L-pieces (if visible, in order: BL,BR,TL,TR): {1}", _moduleId, rotations.Select(a => a).Join(","));
 		Debug.LogFormat ("[The Witness #{0}] ksqu = Black Square", _moduleId);
 		Debug.LogFormat ("[The Witness #{0}] wsqu = White Square", _moduleId);
 		Debug.LogFormat ("[The Witness #{0}] 1sun = Sun 1", _moduleId);
