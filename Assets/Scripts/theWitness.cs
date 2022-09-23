@@ -162,6 +162,7 @@ public class theWitness : MonoBehaviour {
 			correctLines = new[] { "1" };
 			Debug.LogFormat ("[The Witness #{0}] To solve the module in this state without commands, press ONLY the submit button upon getting a board without a solution.", _moduleId);
 		}
+		Debug.LogFormat("[The Witness #{0}] ------------------------------------------------", _moduleId);
 	}
 
     //	
@@ -202,7 +203,7 @@ public class theWitness : MonoBehaviour {
 		var SymbolsTHalf = new[] { "  ", "ks" , "ws" , "1s" , "2s" , "Lb", "de" };
 		var SymbolsBHalf = new[] { "  ", "qu" , "qu" , "un" , "un" , "lk", "lr" };
 		*/
-		var SymbolsFullName = new[] { "Empty", "SquareBlack", "SquareWhite", "SunPink", "SunBlue", "LBlock", "Y", };
+		var SymbolsFullName = new[] { "Empty", "SquareBlack", "SquareWhite", "SunPink", "SunBlue", "LBlock", "Deleter", };
 		Debug.LogFormat ("[The Witness #{0}] Generated Puzzle:", _moduleId);
 		Debug.LogFormat("[The Witness #{0}] TL Symbol: {1} {2}", _moduleId, SymbolsFullName[Symboltl], Symboltl == 5 ? (90*rotations[2]).ToString("(rotated 0 deg CW)") : "");
 		Debug.LogFormat("[The Witness #{0}] TR Symbol: {1} {2}", _moduleId, SymbolsFullName[Symboltr], Symboltr == 5 ? (90 * rotations[3]).ToString("(rotated 0 deg CW)") : "");
