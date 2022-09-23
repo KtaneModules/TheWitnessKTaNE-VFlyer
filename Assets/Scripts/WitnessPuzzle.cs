@@ -2,7 +2,7 @@
 
 public class WitnessPuzzle
 {
-	public bool _is3x3;
+	public int[] dimensions;
 	public int[] startIdxes, endIdxes;
 	public WitnessSymbol[] allSymbols;
 }

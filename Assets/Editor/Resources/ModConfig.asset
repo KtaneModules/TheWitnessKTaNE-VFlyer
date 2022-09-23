@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Name: ModConfig
   m_EditorClassIdentifier: 
   id: thewitness
-  title: The Witness
+  title: The Witness [REUPLOAD]
   author: VFlyer, bmo22xd
   description: "...and a dream.\n\nComplete this mysterious puzzle inspired by \"The
     Witness\" game.\n\nmoduleID: thewitness\nOriginally created by: bmo22xd\nRenewed
@@ -21,6 +21,6 @@ MonoBehaviour:
     really appreciated.\n\nManual included in the mod file and found here:\n[url=https://ktane.timwi.de/HTML/The%20Witness.html]https://ktane.timwi.de/HTML/The%20Witness.html[/url]\n\nSource
     Code:\nOriginal Version: [url=https://github.com/PauGuri2002/TheWitnessKTaNE]https://github.com/PauGuri2002/TheWitnessKTaNE[/url]\nRenewed
     Version: [url=https://github.com/VFlyer/TheWitnessKTaNE] https://github.com/VFlyer/TheWitnessKTaNE[/url]"
-  version: REV 4.01
+  version: REV 4.02
   outputFolder: build
   previewImage: {fileID: 2800000, guid: 4953ab0e5b40b0745b9320b8ac5f2be4, type: 3}

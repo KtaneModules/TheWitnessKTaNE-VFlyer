@@ -27,8 +27,8 @@ public class theWitness : MonoBehaviour {
 	private int symbolRandomizer = 0;
 
 	private string currentLine;
-	private string correctLine;
-	private string alternativeLine;
+
+	string[] correctLines;
 
 	public Material[] wireColors = new Material[3];
 	public Material[] symbols = new Material[6];
@@ -70,16 +70,7 @@ public class theWitness : MonoBehaviour {
 
 	void Activate()
 	{
-		Init();
 		_lightsOn = true;
-	}
-
-
-	void Init()
-	{
-		
-
-		//SetupSolution (Random.Range (1, 44));
 	}
 
 	void Awake(){
@@ -105,73 +96,70 @@ public class theWitness : MonoBehaviour {
 	//for symbol setup (in puzzle#Array): 0-empty, 1-bsquare, 2-wsquare, 3-sun1, 4-sun2, 5-lpiece, 6-deleter (order tl, tr, bl, br)
 	void SetupSolution(int puzzleId){
 		if (puzzleId >= 1 && puzzleId < 10) {
-			correctLine = "14789";
-			alternativeLine = "12369";
-
+			correctLines = new[] { "12369", "14789" };
 			symbolRandomizer = Random.Range (0, 20) * 4;
 			int[] puzzle1Array = new int[] {3,4,4,3, 4,3,3,4, 3,6,4,3, 6,3,3,4, 3,4,6,3, 4,3,3,6, 4,6,3,4, 6,4,4,3, 4,3,6,4, 3,4,4,6, 1,1,1,1, 2,2,2,2, 5,3,3,6, 3,6,5,3, 6,3,3,5, 3,5,6,3, 5,4,4,6, 4,6,5,4, 6,4,4,5, 4,5,6,4};
 			SetupSymbols (puzzle1Array [symbolRandomizer], puzzle1Array [symbolRandomizer + 1], puzzle1Array [symbolRandomizer + 2], puzzle1Array [symbolRandomizer + 3]);
 
-			Debug.LogFormat ("[The Witness #{0}] Correct line crosses these intersections: '1, 4, 7, 8, 9' or '1, 2, 3, 6, 9'", _moduleId);
+			Debug.LogFormat("[The Witness #{0}] Possible solution line crosses these intersections in reading order: \"1, 4, 7, 8, 9\"", _moduleId);
+			Debug.LogFormat("[The Witness #{0}] Possible solution line crosses these intersections in reading order: \"1, 2, 3, 6, 9\"", _moduleId);
 
 		} else if (puzzleId >= 10 && puzzleId < 18) {
-			correctLine = "12569";
-
-			Debug.LogFormat ("[The Witness #{0}] Correct line crosses these intersections:  '1, 2, 5, 6, 9'", _moduleId);
-
+			correctLines = new[] { "12569" };
 			symbolRandomizer = Random.Range (0, 16) * 4;
 			int[] puzzle2Array = new int[] {5,2,1,1, 5,1,2,2, 1,2,5,1, 2,1,5,2, 1,2,1,5, 2,1,2,5, 1,2,0,1, 2,1,0,2, 1,2,1,1, 2,1,2,2, 3,0,5,3, 5,0,3,3, 3,0,3,5, 4,0,5,4, 5,0,4,4, 4,0,4,5};
 			SetupSymbols (puzzle2Array [symbolRandomizer], puzzle2Array [symbolRandomizer + 1], puzzle2Array [symbolRandomizer + 2], puzzle2Array [symbolRandomizer + 3]);
+
+			Debug.LogFormat("[The Witness #{0}] Possible solution line crosses these intersections in reading order: \"1, 2, 5, 6, 9\"", _moduleId);
+
 		} else if (puzzleId >= 18 && puzzleId < 26) {
-			correctLine = "14589";
+			correctLines = new[] { "14589" };
 			symbolRandomizer = Random.Range (0, 16) * 4;
 			int[] puzzle3Array = new int[] {1,1,2,5, 2,2,1,5, 1,5,2,1, 2,5,1,2, 5,1,2,1, 5,2,1,2, 1,0,2,1, 2,0,1,2, 1,1,2,1, 2,2,1,2, 3,5,0,3, 3,3,0,5, 5,3,0,3, 4,5,0,4, 4,4,0,5, 5,4,0,4};
 			SetupSymbols (puzzle3Array [symbolRandomizer], puzzle3Array [symbolRandomizer + 1], puzzle3Array [symbolRandomizer + 2], puzzle3Array [symbolRandomizer + 3]);
 
-			Debug.LogFormat ("[The Witness #{0}] Correct line crosses these intersections:  '1, 4, 5, 8, 9'", _moduleId);
+			Debug.LogFormat("[The Witness #{0}] Possible solution line crosses these intersections in reading order: \"1, 4, 5, 8, 9\"", _moduleId);
 
 		} else if (puzzleId >= 26 && puzzleId < 34) {
-			correctLine = "1478569";
-			alternativeLine = "1236589";
-
+			correctLines = new[] { "1236589", "1478569" };
 			symbolRandomizer = Random.Range (0, 16) * 4;
 			int[] puzzle4Array = new int[] {1,5,1,2, 2,5,2,1, 5,1,1,2, 5,2,2,1, 1,1,5,2, 2,2,5,1, 0,1,1,2, 0,2,2,1, 1,1,1,2, 2,2,2,1, 5,3,3,0, 3,5,3,0, 3,3,5,0, 5,4,4,0, 4,5,4,0, 4,4,5,0};
 			SetupSymbols (puzzle4Array [symbolRandomizer], puzzle4Array [symbolRandomizer + 1], puzzle4Array [symbolRandomizer + 2], puzzle4Array [symbolRandomizer + 3]);
 
-			Debug.LogFormat ("[The Witness #{0}] Correct line crosses these intersections: '1, 4, 7, 8, 5, 6, 9' or '1, 2, 3, 6, 5, 8, 9'", _moduleId);
+			Debug.LogFormat("[The Witness #{0}] Possible solution line crosses these intersections in reading order: \"1, 4, 7, 8, 5, 6, 9\"", _moduleId);
+			Debug.LogFormat("[The Witness #{0}] Possible solution line crosses these intersections in reading order: \"1, 2, 3, 6, 5, 8, 9\"", _moduleId);
 
-		} else if (puzzleId >= 34 && puzzleId < 42) {
-			correctLine = "1254789";
-			alternativeLine = "1452369";
-
+		}
+		else if (puzzleId >= 34 && puzzleId < 42) {
+			correctLines = new[] { "1254789", "1452369" };
 			symbolRandomizer = Random.Range (0, 16) * 4;
 			int[] puzzle5Array = new int[] {2,1,5,1, 1,2,5,2, 2,1,1,5, 1,2,2,5, 2,5,1,1, 1,5,2,2, 2,1,1,0, 1,2,2,0, 2,1,1,1, 1,2,2,2, 0,3,3,5, 0,3,5,3, 0,5,3,3, 0,4,4,5, 0,4,5,4, 0,5,4,4};
 			SetupSymbols (puzzle5Array [symbolRandomizer], puzzle5Array [symbolRandomizer + 1], puzzle5Array [symbolRandomizer + 2], puzzle5Array [symbolRandomizer + 3]);
 
-			Debug.LogFormat ("[The Witness #{0}] Correct line crosses these intersections: '1, 2, 5, 4, 7, 8, 9' or '1, 4, 5, 2, 3, 6, 9'", _moduleId);
+			Debug.LogFormat("[The Witness #{0}] Possible solution line crosses these intersections in reading order: \"1, 2, 5, 4, 7, 8, 9\"", _moduleId);
+			Debug.LogFormat("[The Witness #{0}] Possible solution line crosses these intersections in reading order: \"1, 4, 5, 2, 3, 6, 9\"", _moduleId);
 
 		} else if (puzzleId == 42) {
-			correctLine = "12589";
-			alternativeLine = "147852369";
-
-			Debug.LogFormat ("[The Witness #{0}] Correct line crosses these intersections: '1, 2, 5, 8, 9' or '1, 4, 7, 8, 5, 2, 3, 6, 9'", _moduleId);
-
+			correctLines = new[] { "12589", "147852369" };
 			symbolRandomizer = Random.Range (0, 2) * 4;
 			int[] puzzle6Array = new int[] { 1,2,1,2, 2,1,2,1 };
 			SetupSymbols (puzzle6Array [symbolRandomizer], puzzle6Array [symbolRandomizer + 1], puzzle6Array [symbolRandomizer + 2], puzzle6Array [symbolRandomizer + 3]);
-		} else if (puzzleId == 43) {
-			correctLine = "123654789";
-			alternativeLine = "14569";
 
+			Debug.LogFormat("[The Witness #{0}] Possible solution line crosses these intersections in reading order: \"1, 2, 5, 8, 9\"", _moduleId);
+			Debug.LogFormat("[The Witness #{0}] Possible solution line crosses these intersections in reading order: \"1, 4, 7, 8, 5, 2, 3, 6, 9\"", _moduleId);
+
+		} else if (puzzleId == 43) {
+			correctLines = new[] { "123654789", "14569" };
 			symbolRandomizer = Random.Range (0, 2) * 4;
 			int[] puzzle7Array = new int[] { 1,1,2,2, 2,2,1,1 };
 			SetupSymbols (puzzle7Array [symbolRandomizer], puzzle7Array [symbolRandomizer + 1], puzzle7Array [symbolRandomizer + 2], puzzle7Array [symbolRandomizer + 3]);
 
-			Debug.LogFormat ("[The Witness #{0}] Correct line crosses these intersections: '1, 2, 3, 6, 5, 4, 7, 8, 9' or '1, 4, 5, 6, 9'", _moduleId);
+			Debug.LogFormat ("[The Witness #{0}] Possible solution line crosses these intersections in reading order: \"1, 2, 3, 6, 5, 4, 7, 8, 9\"", _moduleId);
+			Debug.LogFormat("[The Witness #{0}] Possible solution line crosses these intersections in reading order: \"1, 4, 5, 6, 9\"", _moduleId);
 
 		} else {
 			Debug.LogFormat ("[The Witness #{0}] The module was unable to generate a puzzle with a reasonable solution. Please report this issue to VFlyer on Discord as this is a serious issue.", _moduleId);
-			correctLine = "1";
+			correctLines = new[] { "1" };
 			Debug.LogFormat ("[The Witness #{0}] To solve the module in this state without commands, press ONLY the submit button upon getting a board without a solution.", _moduleId);
 		}
 	}
@@ -210,10 +198,19 @@ public class theWitness : MonoBehaviour {
 
     void SetupSymbols(int Symboltl, int Symboltr, int Symbolbl, int Symbolbr){
 
+		/*
 		var SymbolsTHalf = new[] { "  ", "ks" , "ws" , "1s" , "2s" , "Lb", "de" };
 		var SymbolsBHalf = new[] { "  ", "qu" , "qu" , "un" , "un" , "lk", "lr" };
-
+		*/
+		var SymbolsFullName = new[] { "Empty", "SquareBlack", "SquareWhite", "SunPink", "SunBlue", "LBlock", "Y", };
 		Debug.LogFormat ("[The Witness #{0}] Generated Puzzle:", _moduleId);
+		Debug.LogFormat("[The Witness #{0}] TL Symbol: {1} {2}", _moduleId, SymbolsFullName[Symboltl], Symboltl == 5 ? (90*rotations[2]).ToString("(rotated 0 deg CW)") : "");
+		Debug.LogFormat("[The Witness #{0}] TR Symbol: {1} {2}", _moduleId, SymbolsFullName[Symboltr], Symboltr == 5 ? (90 * rotations[3]).ToString("(rotated 0 deg CW)") : "");
+		Debug.LogFormat("[The Witness #{0}] BL Symbol: {1} {2}", _moduleId, SymbolsFullName[Symbolbl], Symbolbl == 5 ? (90 * rotations[0]).ToString("(rotated 0 deg CW)") : "");
+		Debug.LogFormat("[The Witness #{0}] BR Symbol: {1} {2}", _moduleId, SymbolsFullName[Symbolbr], Symbolbr == 5 ? (90 * rotations[1]).ToString("(rotated 0 deg CW)") : "");
+
+
+		/*
 		Debug.LogFormat ("[The Witness #{0}] 1--2--3", _moduleId);
 		Debug.LogFormat ("[The Witness #{0}] |{1}|{2}|", _moduleId,SymbolsTHalf[Symboltl],SymbolsTHalf[Symboltr]);
 		Debug.LogFormat ("[The Witness #{0}] |{1}|{2}|", _moduleId,SymbolsBHalf[Symboltl],SymbolsBHalf[Symboltr]);
@@ -228,8 +225,9 @@ public class theWitness : MonoBehaviour {
 		Debug.LogFormat ("[The Witness #{0}] 2sun = Sun 2", _moduleId);
 		Debug.LogFormat ("[The Witness #{0}] Lblk = L Piece", _moduleId);
 		Debug.LogFormat ("[The Witness #{0}] delr = Deleter", _moduleId);
+		*/
 
-        var SymbolsTLAll = new[] { bsquare_tl, wsquare_tl, sun1_tl, sun2_tl, lpiece_tl, deleter_tl };
+		var SymbolsTLAll = new[] { bsquare_tl, wsquare_tl, sun1_tl, sun2_tl, lpiece_tl, deleter_tl };
 		for (int v = 0; v < SymbolsTLAll.Length; v++)
 		{
             if (v == Symboltl - 1)
@@ -285,15 +283,9 @@ public class theWitness : MonoBehaviour {
 
 		Audio.PlayGameSoundAtTransform (KMSoundOverride.SoundEffect.ButtonPress, submit.transform);
 		submit.AddInteractionPunch ();
-		if ( alternativeLine != null) {
-			Debug.LogFormat ("[The Witness #{0}] Inputted line: {3}. Expected line: {1} or {2}", _moduleId, correctLine, alternativeLine, currentLine);
-		}
-		else
-		{
-			Debug.LogFormat ("[The Witness #{0}] Inputted line: {2}. Expected line: {1}", _moduleId, correctLine, currentLine);
-		}
-		if (correctLine == currentLine || alternativeLine == currentLine) {
-			Debug.LogFormat ("[The Witness #{0}] That is correct. Module defused.", _moduleId);
+		Debug.LogFormat ("[The Witness #{0}] Inputted line crosses these intersections in reading order: \"{1}\".", _moduleId, currentLine.ToCharArray().Join(", "));
+		if (correctLines.Any(a => a.SequenceEqual(currentLine))) {
+			Debug.LogFormat ("[The Witness #{0}] That line is correct. Module defused.", _moduleId);
 
 			Audio.PlaySoundAtTransform ("disarmed", Module.transform);
 			wireGray.SetActive (false);
@@ -304,7 +296,7 @@ public class theWitness : MonoBehaviour {
 		} else {
 			
 
-			Debug.LogFormat ("[The Witness #{0}] That is not correct. Strike!", _moduleId);
+			Debug.LogFormat ("[The Witness #{0}] That line is not correct. Strike!", _moduleId);
 
 			Module.HandleStrike ();
 
@@ -420,9 +412,10 @@ public class theWitness : MonoBehaviour {
 
 	IEnumerator TwitchHandleForcedSolve()
     {
-        for (var x = 0; x < correctLine.Length; x++)
+		var selectedCorrectLine = correctLines.PickRandom();
+        for (var x = 0; x < selectedCorrectLine.Length; x++)
         {
-			btn[correctLine[x] - '1'].OnInteract();
+			btn[selectedCorrectLine[x] - '1'].OnInteract();
 			yield return new WaitForSeconds(0.1f);
         }
 		submit.OnInteract();

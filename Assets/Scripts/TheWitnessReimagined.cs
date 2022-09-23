@@ -118,7 +118,7 @@ public class TheWitnessReimagined : MonoBehaviour {
 					{
 						curPathDrawn.Add(y);
 					}
-					else if (curPathDrawn.Any() && curPathDrawn.Last() == endIdx)
+					else if (curPathDrawn.Any() && endIdx == curPathDrawn.Last())
 					{
 						
 						if (possibleValidPaths.Any(a => a.SequenceEqual(curPathDrawn)))
